@@ -1,88 +1,139 @@
-import React from "react";
-import * as yup from "yup";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, useNavigate } from "react-router-dom";
 import { Container } from "../../styles/global";
-import { Form, BoxLogo } from "./styled";
+import { FormRegister, Box } from "./styled";
+import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
+import SchemaRegister from "../validations/registerUser";
+import Apii from "../../services/api";
+import { toast } from "react-toastify";
+import {BsEyeFill} from "react-icons/bs"
 
 const Register = () => {
   const navigate = useNavigate();
-
-  const formSchema = yup.object().shape({
-    userName: yup.string().required("Nome obrigatório"),
-
-    fullName: yup.string().required("Nome completo obrigatório"),
-
-    email: yup.string().required("Email obrigatório").email("Email inválido"),
-
-    confirmEmail: yup
-      .string()
-      .required("Confirmação de email obrigatório")
-      .email("Email inválido"),
-
-    password: yup
-      .string()
-      .required("Senha obrigatória")
-      .matches(
-        "^(?=.*[A-Z])(?=.*[!#@$%&])(?=.*[0-9])(?=.*[a-z]).{6,18}$",
-        "Deve conter ao menos um dígito || Deve conter ao menos uma letra minúscula || Deve conter ao menos uma letra maiúscula || Deve conter ao menos um caractere especial || Deve conter no mínimo 8 caracteres, e no máximo 18 caracteres"
-      ),
-
-    confirmPassword: yup.string().required("Confirmação de senha obrigatória"),
-
-    image: yup.string().required("Url obrigatória"),
-  });
+  const[isShowPass, setIsShowPass] = useState(true);
+  const[isShowConfirmPass, setIsShowConfirmPass] = useState(true);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(formSchema),
+    resolver: yupResolver(SchemaRegister),
   });
 
-  const onSubmit = (data) => {
-    navigate("/card");
+  const onSubmit = async (data) => {
+    Apii.post("users", data)
+      .then((resp) => {
+        toast.success("Usuário cadastrado");
+        navigate("/");
+      })
+      .catch((err) => {
+        err.response.data.message[0].includes("password")
+          ? toast.error("Senha precisa de no mínimo 6 caracters")
+          : toast.error("Email já existe");
+      });
   };
-
+ 
   return (
     <Container tag="main" size="large">
-      <Box>
-        <img src="../../../public/assets/.svg" alt="Logo" />
-        <Link>Voltar</Link>
+      <Box classs="boxLogo">
+        <img src="../../../public/assets/Logo.svg" alt="Logo" />
+        <Link to="/">Voltar</Link>
       </Box>
-      <Form onSubmit={handleSubmit(onSubmit)}>
 
-        
+      <FormRegister onSubmit={handleSubmit(onSubmit)}>
+        <Box classs="boxForm">
+          <ThemeTitle>Crie sua conta</ThemeTitle>
+          <ThemeParagraph>Rápido e grátis, vamos nessa!!</ThemeParagraph>
+        </Box>
 
-        <input placeholder="Nome de usuário*" {...register("userName")} />
-        {errors.userName?.message}
+        <div className="boxLabel">
+          <input
+            id="name"
+            placeholder="Digite aqui seu nome"
+            {...register("name")}
+          />
+          {errors.name?.message}
+          <label htmlFor="name">Nome</label>
+        </div>
 
-        <input placeholder="Nome completo*" {...register("fullName")} />
-        {errors.fullName?.message}
+        <div className="boxLabel">
+          <input
+            id="email"
+            placeholder="Digite aqui seu email"
+            {...register("email")}
+          />
+          {errors.email?.message}
+          <label htmlFor="email">Email</label>
+        </div>
 
-        <input placeholder="Email*" {...register("email")} />
-        {errors.email?.message}
+        <div className="boxLabel">
+          <input
+            id="password"
+            type={isShowPass ? "password" : "text"}
+            placeholder="Digite aqui sua senha"
+            {...register("password")}
+          />
+          <label htmlFor="password">Senha</label>
+          {errors.password?.message}
+          <BsEyeFill onClick={() => setIsShowPass(!isShowPass)}/>
+        </div>
 
-        <input placeholder="Confirme seu Email*" {...register("confirmEmail")} />
-        {errors.confirmEmail?.message}
+        <div className="boxLabel">
+          <input
+            id="confirmPassword"
+            type={isShowConfirmPass ? "password" : "text"}
+            placeholder="Confirme sua senha"
+            {...register("confirmPassword")}
+          />
+          <label htmlFor="confirmPassword">Confirmar Senha</label>
+          {errors.confirmPassword?.message}
+          <BsEyeFill onClick={() => setIsShowConfirmPass(!isShowConfirmPass)}/>
+        </div>
 
-        <input type="password" placeholder="Senha*" {...register("password")} />
-        {errors.password?.message}
+        <div className="boxLabel">
+          <input 
+            id="bio" 
+            placeholder="Fale sobre você" 
+            {...register("bio")} 
+          />
+          <label htmlFor="bio">Bio</label>
+          {errors.bio?.message}
+        </div>
 
-        <input
-          type="password"
-          placeholder="Confirme sua senha*"
-          {...register("confirmPassword")}
-        />
-        {errors.confirmPassword?.message}
+        <div className="boxLabel">
+          <input
+            id="contact"
+            placeholder="Opção de contato"
+            {...register("contact")}
+          />
+          <label htmlFor="contact">Contato</label>
+          {errors.contact?.message}
+        </div>
 
-        <input placeholder="URL da imagem*" {...register("image")} />
-        {errors.image?.message}
+        <div className="boxSelect">
+          <label>Selecionar Módulo</label>
+          <select {...register("course_module")}>
+            {/* <option value=""></option> */}
+            <option value="Primeiro módulo (Introdução ao Frontend)">
+              Primeiro módulo (Introdução ao Frontend)
+            </option>
+            <option value="Segundo módulo (Frontend Avançado)">
+              Segundo módulo (Frontend Avançado)
+            </option>
+            <option value="Terceiro módulo (Introdução ao Backend)">
+              Terceiro módulo (Introdução ao Backend)
+            </option>
+            <option value="Quarto módulo (Backend Avançado)">
+              Quarto módulo (Backend Avançado)
+            </option>
+          </select>
+        </div>
 
-        <button type="submit">Enviar</button>
-      </Form>
+        <button type="submit">Cadastrar</button>
+      </FormRegister>
     </Container>
   );
 };

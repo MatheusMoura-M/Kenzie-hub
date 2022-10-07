@@ -1,6 +1,6 @@
 import styled, {css} from "styled-components"
 
-export const FormRegister = styled.form`
+export const FormLogin = styled.form`
   display:flex; 
   flex-direction: column;
   align-items: center; 
@@ -8,7 +8,7 @@ export const FormRegister = styled.form`
 
   width: 30%;
   min-width: 300px;
-  min-height: 550px;
+  min-height: 350px;
 
   padding: 1rem 0;
 
@@ -93,80 +93,13 @@ export const FormRegister = styled.form`
     }
   }
 
-  .boxSelect{
+  .boxRegister{
+    display:flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    gap:10px;
+
     width: 85%;
-
-    label{
-      font-family: var(--font-family);
-      font-size: 14px;
-      font-weight: var(--fontWei-headline);
-      color: var(--grey-4);
-    }
-
-    select{
-      width: 100%;
-      height: 30px;
-      
-      background: var(--grey-3);
-      color: var(--grey-4);
-      border-radius: .25rem;
-      
-      padding-left: 10px 
-    }
-  }
-
-  button{
-    width: 85%;
-    height: 30px;
-    
-    background: var(--color-primary-dark);
-    color: var(--grey-5);
-    border-radius: 0.25rem;
-
-    font-family: var(--font-family);
-  }
-`
-
-export const Box = styled.div`
-  display:flex; 
-  flex-direction: column;
-  align-items: center; 
-  justify-content: center;
-  
-  ${({classs}) => {
-    switch (classs) {
-      case "boxLogo":
-        return css`
-            flex-direction: row;
-            justify-content: space-between;
-            width: 30%;
-            min-height: 40px;
-        `;
-      case "boxForm":
-        return css`
-          gap: 10px;
-        `;
-      // case "large":
-      //   return css`
-          
-      //   `;
-      default:
-        return false;
-    }
-  }}
-
-  a{
-    display: flex;
-    align-items: center;
-
-    font-family: var(--font-family);
-
-    color: var(--white);
-    background: var(--grey-2);
-    border-radius: .2rem;
-    
-    padding: .3rem .6rem;
-  
-    min-height: 40px;
   }
 `

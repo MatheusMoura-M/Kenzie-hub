@@ -78,6 +78,17 @@ export const GlobalStyle = createGlobalStyle`
       min-width: 100%;
     }
 
+    main{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin: 0 auto;
+      gap: 15px;
+      min-height: 100vh;
+    }
+
     h1, h2, h3, h4, h5, h6, p, span, li{
       font-family: 'Inter', sans-serif;
       color: var(--color-white);

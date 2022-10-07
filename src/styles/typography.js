@@ -5,6 +5,7 @@ export const ThemeTitle = styled.h2`
   font-weight: var(--fontWei-title);
   line-height: var(--lineHei-title);
   font-size: var(--fontSize-title);
+  color: var(--grey-5);
 
   ${({ size }) => {
     switch (size) {
@@ -24,6 +25,7 @@ export const ThemeParagraph = styled.p`
   font-size: var(--fontSize-headline);
   font-weight: var(--fontWei-headline);
   line-height: var(--lineHei-headline);
+  color: var(--grey-4);
 
   ${({ size }) => {
     switch (size) {

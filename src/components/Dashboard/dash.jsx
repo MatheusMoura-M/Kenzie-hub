@@ -1,8 +1,13 @@
 import React from 'react'
+import { Container } from '../../styles/global';
 
 const Dash = () => {
+
+
   return (
-    <div>Dash</div>
+    <Container tag="main" size="default">
+        <div>Dashboard</div>
+    </Container>
   )
 }
 
