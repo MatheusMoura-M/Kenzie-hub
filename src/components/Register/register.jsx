@@ -8,12 +8,13 @@ import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
 import SchemaRegister from "../validations/registerUser";
 import Apii from "../../services/api";
 import { toast } from "react-toastify";
-import {BsEyeFill} from "react-icons/bs"
+import { BsEyeFill } from "react-icons/bs";
+import { RiErrorWarningFill } from "react-icons/ri";
 
 const Register = () => {
   const navigate = useNavigate();
-  const[isShowPass, setIsShowPass] = useState(true);
-  const[isShowConfirmPass, setIsShowConfirmPass] = useState(true);
+  const [isShowPass, setIsShowPass] = useState(true);
+  const [isShowConfirmPass, setIsShowConfirmPass] = useState(true);
 
   const {
     register,
@@ -35,7 +36,7 @@ const Register = () => {
           : toast.error("Email já existe");
       });
   };
- 
+
   return (
     <Container tag="main" size="large">
       <Box classs="boxLogo">
@@ -55,8 +56,11 @@ const Register = () => {
             placeholder="Digite aqui seu nome"
             {...register("name")}
           />
-          {errors.name?.message}
           <label htmlFor="name">Nome</label>
+          <p>
+            {errors.name && <RiErrorWarningFill />}
+            {errors.name?.message}
+          </p>
         </div>
 
         <div className="boxLabel">
@@ -65,8 +69,11 @@ const Register = () => {
             placeholder="Digite aqui seu email"
             {...register("email")}
           />
-          {errors.email?.message}
           <label htmlFor="email">Email</label>
+          <p>
+            {errors.email && <RiErrorWarningFill />}
+            {errors.name?.message}
+          </p>
         </div>
 
         <div className="boxLabel">
@@ -77,8 +84,11 @@ const Register = () => {
             {...register("password")}
           />
           <label htmlFor="password">Senha</label>
-          {errors.password?.message}
-          <BsEyeFill onClick={() => setIsShowPass(!isShowPass)}/>
+          <p>
+            {errors.password && <RiErrorWarningFill />}
+            {errors.password?.message}
+          </p>
+          <BsEyeFill onClick={() => setIsShowPass(!isShowPass)} />
         </div>
 
         <div className="boxLabel">
@@ -89,18 +99,20 @@ const Register = () => {
             {...register("confirmPassword")}
           />
           <label htmlFor="confirmPassword">Confirmar Senha</label>
-          {errors.confirmPassword?.message}
-          <BsEyeFill onClick={() => setIsShowConfirmPass(!isShowConfirmPass)}/>
+          <p>
+            {errors.confirmPassword && <RiErrorWarningFill />}{" "}
+            {errors.confirmPassword?.message}
+          </p>
+          <BsEyeFill onClick={() => setIsShowConfirmPass(!isShowConfirmPass)} />
         </div>
 
         <div className="boxLabel">
-          <input 
-            id="bio" 
-            placeholder="Fale sobre você" 
-            {...register("bio")} 
-          />
+          <input id="bio" placeholder="Fale sobre você" {...register("bio")} />
           <label htmlFor="bio">Bio</label>
-          {errors.bio?.message}
+          <p>
+            {errors.bio && <RiErrorWarningFill />}
+            {errors.bio?.message}
+          </p>
         </div>
 
         <div className="boxLabel">
@@ -110,7 +122,10 @@ const Register = () => {
             {...register("contact")}
           />
           <label htmlFor="contact">Contato</label>
-          {errors.contact?.message}
+          <p>
+            {errors.contact && <RiErrorWarningFill />}
+            {errors.contact?.message}
+          </p>
         </div>
 
         <div className="boxSelect">

@@ -80,7 +80,7 @@ export const ButtonSecondary = styled.button`
         `;
       case "small":
         return css`
-          width: 100px;
+          width: 80px;
           height: 30px;
         `;
       default:

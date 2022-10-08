@@ -14,6 +14,11 @@ export const ThemeTitle = styled.h2`
           font-size: 14px;
           line-height: 22px;
         `;
+      case "medium":
+        return css`
+          font-size: 16px;
+          line-height: 22px;
+        `;
       default:
         return false;
     }
@@ -55,6 +60,10 @@ export const ThemeSpan = styled.span`
       case "italic":
         return css`
           font-weight: var(--fontWei-headlineItalic);
+        `;
+      case "light":
+        return css`
+          color: var(--grey-4)
         `;
       default:
         return false;

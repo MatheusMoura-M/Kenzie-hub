@@ -86,7 +86,6 @@ export const GlobalStyle = createGlobalStyle`
       width: 100%;
       margin: 0 auto;
       gap: 15px;
-      min-height: 100vh;
     }
 
     h1, h2, h3, h4, h5, h6, p, span, li{
@@ -106,20 +105,21 @@ export const Container = styled(BaseTag)`
   justify-content: center;
   width: 100%;
   margin: 0 auto;
-
+  
   ${({ size }) => {
     switch (size) {
       case "small":
         return css`
           max-width: 400px;
-        `;
+          `;
       case "default":
         return css`
-          max-width: 800px;
+          justify-content: flex-start;
+          max-height: 70%;
+          min-height: 470px;
         `;
       case "large":
         return css`
-          gap: 15px;
           min-height: 100vh;
           ;
         `;

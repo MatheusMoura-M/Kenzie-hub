@@ -25,6 +25,21 @@ export const FormRegister = styled.form`
 
     padding-top: 13px;
 
+    p{
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 2px;
+      
+      color: #9b1414;
+      font-size: 13px;
+      margin: 3px 0 0 6px;
+
+      svg{
+        position: static;
+      }
+    }
+
     svg{
       position: absolute;
       right: 5px;
@@ -139,6 +154,13 @@ export const Box = styled.div`
         return css`
             flex-direction: row;
             justify-content: space-between;
+            width: 30%;
+            min-height: 40px;
+        `;
+      case "boxLogoLogin":
+        return css`
+            flex-direction: row;
+            justify-content: center;
             width: 30%;
             min-height: 40px;
         `;

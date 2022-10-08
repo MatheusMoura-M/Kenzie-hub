@@ -26,23 +26,24 @@ const Login = ({ setUser, loading, setLoading }) => {
   });
 
   const onSubmit = (data) => {
-    {
-      loading ? navigate("/loading") : navigate("/dashboard");
-    }
-
+    
     Apii.post("sessions", data)
-      .then((resp) => {
-        window.localStorage.clear();
-        window.localStorage.setItem("@Token", resp.data.token);
-        window.localStorage.setItem("@UserId", resp.data.user.id);
-        setUser(resp.data.user);
-      })
-      .catch((err) => {
-        toast.error("Combinação de email/senha incorreta");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    .then((resp) => {
+      window.localStorage.clear();
+      window.localStorage.setItem("@Token", resp.data.token);
+      window.localStorage.setItem("@UserId", resp.data.user.id);
+      setUser(resp.data.user);
+      navigate("/dashboard")
+    })
+    .catch((err) => {
+      toast.error("Combinação de email/senha incorreta");
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+    // {
+    //   loading ? navigate("/loading") : navigate("/dashboard");
+    // }
   };
 
   const goRegister = () => {
@@ -50,8 +51,8 @@ const Login = ({ setUser, loading, setLoading }) => {
   };
 
   return (
-    <Container tag="main">
-      <Box classs="boxLogo">
+    <Container tag="main" size="large">
+      <Box classs="boxLogoLogin">
         <img src="../../../public/assets/Logo.svg" alt="Logo" />
       </Box>
       <FormLogin classs="formLogin" onSubmit={handleSubmit(onSubmit)}>
