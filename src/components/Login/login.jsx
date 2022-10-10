@@ -11,6 +11,7 @@ import SchemaLogin from "../validations/loginUser";
 import { BsEyeFill } from "react-icons/bs";
 import Apii from "../../services/api";
 import { toast } from "react-toastify";
+import Logo from "../../../public/assets/Logo.svg"
 
 const Login = ({ setUser, loading, setLoading }) => {
   const [isShowPass, setIsShowPass] = useState(true);
@@ -53,7 +54,7 @@ const Login = ({ setUser, loading, setLoading }) => {
   return (
     <Container tag="main" size="large">
       <Box classs="boxLogoLogin">
-        <img src="../../../public/assets/Logo.svg" alt="Logo" />
+        <img src={Logo} alt="Logo" />
       </Box>
       <FormLogin classs="formLogin" onSubmit={handleSubmit(onSubmit)}>
         <ThemeTitle>Login</ThemeTitle>

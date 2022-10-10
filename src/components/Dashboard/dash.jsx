@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Apii from "../../services/api";
 import { ButtonSecondary } from "../../styles/buttons";
 import { Container } from "../../styles/global";
 import { ThemeParagraph, ThemeSpan, ThemeTitle } from "../../styles/typography";
+import Logo from "../../../public/assets/Logo.svg"
 import { BoxMain, Header, Nav } from "./styled";
 
 const Dash = ({ user, setUser }) => {
@@ -26,7 +26,7 @@ const Dash = ({ user, setUser }) => {
     <>
       <Nav>
         <div>
-          <img src="../../../public/assets/Logo.svg" alt="Logo" />
+          <img src={Logo} alt="Logo" />
           <ButtonSecondary onClick={() => Logout()} size="small">Sair</ButtonSecondary>
         </div>
       </Nav>

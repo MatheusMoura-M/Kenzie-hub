@@ -10,6 +10,7 @@ import Apii from "../../services/api";
 import { toast } from "react-toastify";
 import { BsEyeFill } from "react-icons/bs";
 import { RiErrorWarningFill } from "react-icons/ri";
+import Logo from "../../../public/assets/Logo.svg"
 
 const Register = () => {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ const Register = () => {
   return (
     <Container tag="main" size="large">
       <Box classs="boxLogo">
-        <img src="../../../public/assets/Logo.svg" alt="Logo" />
+        <img src={Logo} alt="Logo" />
         <Link to="/">Voltar</Link>
       </Box>
 
