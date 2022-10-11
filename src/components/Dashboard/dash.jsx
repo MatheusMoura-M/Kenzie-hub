@@ -1,33 +1,37 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { ButtonSecondary } from "../../styles/buttons";
 import { Container } from "../../styles/global";
 import { ThemeParagraph, ThemeSpan, ThemeTitle } from "../../styles/typography";
-import Logo from "../../../public/assets/Logo.svg"
+import Logo from "../../../public/assets/Logo.svg";
+import { AuthContext } from "../../Contexts/AuthContext";
 import { BoxMain, Header, Nav } from "./styled";
+import LoadingPage from "../Loading/loading";
 
-const Dash = ({ user, setUser }) => {
-  // const [userr, setUserr] = useState([])
-  const navigate = useNavigate()
+const Dash = () => {
+  const navigate = useNavigate();
+  const { user, setUser, loading } = useContext(AuthContext);
 
-  // Apii.get("profile")
-  // .then((resp) => {
-  //   // console.log(resp.data)
-  // })
-  // .catch(err => console.log(err))
+  if (loading) {
+    <>
+      <LoadingPage />
+    </>;
+  }
 
   const Logout = () => {
     setUser();
     window.localStorage.clear();
-    navigate("/")
+    navigate("/");
   };
 
-  return (
+  return user ? (
     <>
       <Nav>
         <div>
           <img src={Logo} alt="Logo" />
-          <ButtonSecondary onClick={() => Logout()} size="small">Sair</ButtonSecondary>
+          <ButtonSecondary onClick={() => Logout()} size="small">
+            Sair
+          </ButtonSecondary>
         </div>
       </Nav>
       <Header>
@@ -47,6 +51,8 @@ const Dash = ({ user, setUser }) => {
         </BoxMain>
       </Container>
     </>
+  ) : (
+    <Navigate to="/" replace />
   );
 };
 

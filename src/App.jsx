@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import RoutesMain from "./routes";
 import { ToastContainer } from "react-toastify";
+import AuthProvider from "./Contexts/AuthContext";
 import "react-toastify/dist/ReactToastify.min.css";
 import "./styles/App.css";
 
 function App() {
   return (
     <div className="App">
-      <RoutesMain />
+      <AuthProvider>
+        <RoutesMain />
+      </AuthProvider>
 
       <ToastContainer
         position="top-right"

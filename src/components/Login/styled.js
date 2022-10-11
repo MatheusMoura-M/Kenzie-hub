@@ -25,11 +25,27 @@ export const FormLogin = styled.form`
 
     padding-top: 13px;
 
-    svg{
+    p{
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 2px;
+      
+      color: var(--message-error);
+      font-size: 13px;
+      margin: 3px 0 0 6px;
+
+      svg{
+        position: static;
+      }
+    }
+
+    & > svg{
       position: absolute;
       right: 5px;
       top: 17px;
       cursor: pointer;
+      color: var(--grey-5)
     }
  
     input{

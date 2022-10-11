@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { ButtonPrimary, ButtonSecondary } from "../../styles/buttons";
@@ -8,14 +8,17 @@ import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
 import { Box } from "../Register/styled";
 import { FormLogin } from "./styled";
 import SchemaLogin from "../validations/loginUser";
-import { BsEyeFill } from "react-icons/bs";
-import Apii from "../../services/api";
-import { toast } from "react-toastify";
-import Logo from "../../../public/assets/Logo.svg"
+import { HiEye } from "react-icons/hi";
+import { HiEyeOff } from "react-icons/hi";
+import { RiErrorWarningFill } from "react-icons/ri";
+import { motion } from "framer-motion";
+import Logo from "../../../public/assets/Logo.svg";
+import { AuthContext } from "../../Contexts/AuthContext";
 
-const Login = ({ setUser, loading, setLoading }) => {
-  const [isShowPass, setIsShowPass] = useState(true);
+const Login = () => {
+  const [isShowPass, setIsShowPass] = useState(false);
 
+  const { onSubmit } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const {
@@ -26,76 +29,81 @@ const Login = ({ setUser, loading, setLoading }) => {
     resolver: yupResolver(SchemaLogin),
   });
 
-  const onSubmit = (data) => {
-    
-    Apii.post("sessions", data)
-    .then((resp) => {
-      window.localStorage.clear();
-      window.localStorage.setItem("@Token", resp.data.token);
-      window.localStorage.setItem("@UserId", resp.data.user.id);
-      setUser(resp.data.user);
-      navigate("/dashboard")
-    })
-    .catch((err) => {
-      toast.error("Combinação de email/senha incorreta");
-    })
-    .finally(() => {
-      setLoading(false);
-    });
-    // {
-    //   loading ? navigate("/loading") : navigate("/dashboard");
-    // }
-  };
-
   const goRegister = () => {
     navigate("/register");
   };
 
   return (
     <Container tag="main" size="large">
-      <Box classs="boxLogoLogin">
-        <img src={Logo} alt="Logo" />
-      </Box>
-      <FormLogin classs="formLogin" onSubmit={handleSubmit(onSubmit)}>
-        <ThemeTitle>Login</ThemeTitle>
+      <motion.div
+        animate={{ opacity: [0, 0.8, 1], x: [-10, 4, 0], y: [-10, 4, 0] }}
+        exit={{ opacity: 0, x: -20 }}
+        transition={{ duration: 1 }}
+      >
+        <Box classs="boxLogoLogin">
+          <img src={Logo} alt="Logo" />
+        </Box>
+      </motion.div>
+      <motion.div
+        animate={{ opacity: [0, 0.8, 1], x: [-10, 4, 0], y: [-10, 4, 0] }}
+        exit={{ opacity: 0, x: -20 }}
+        transition={{ ease: "easeInOut", duration: 1 }}
+      >
+        <FormLogin
+          isShowPass={isShowPass}
+          classs="formLogin"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <ThemeTitle>Login</ThemeTitle>
 
-        <div className="boxLabel">
-          <input
-            id="email"
-            type="text"
-            placeholder="Digite aqui seu email"
-            {...register("email")}
-          />
-          {errors.email?.message}
-          <label htmlFor="email">Email</label>
-        </div>
+          <div className="boxLabel">
+            <input
+              id="email"
+              type="text"
+              placeholder="Digite aqui seu email"
+              {...register("email")}
+            />
+            <label htmlFor="email">Email</label>
+            <p>
+              {errors.email && <RiErrorWarningFill />}
+              {errors.email?.message}
+            </p>
+          </div>
 
-        <div className="boxLabel">
-          <input
-            id="password"
-            type={isShowPass ? "password" : "text"}
-            placeholder="Digite aqui sua senha"
-            {...register("password")}
-          />
-          <label htmlFor="password">Senha</label>
-          {errors.password?.message}
-          <BsEyeFill onClick={() => setIsShowPass(!isShowPass)} />
-        </div>
+          <div className="boxLabel">
+            <input
+              id="password"
+              type={isShowPass ? "text" : "password"}
+              placeholder="Digite aqui sua senha"
+              {...register("password")}
+            />
+            <label htmlFor="password">Senha</label>
+            <p>
+              {errors.password && <RiErrorWarningFill />}
+              {errors.password?.message}
+            </p>
+            {isShowPass ? (
+              <HiEye onClick={() => setIsShowPass(!isShowPass)} />
+            ) : (
+              <HiEyeOff onClick={() => setIsShowPass(!isShowPass)} />
+            )}
+          </div>
 
-        <ButtonPrimary size="small" type="submit">
-          Entrar
-        </ButtonPrimary>
-        <div className="boxRegister">
-          <ThemeParagraph>Ainda não possui uma conta?</ThemeParagraph>
-          <ButtonSecondary
-            size="big"
-            type="button"
-            onClick={() => goRegister()}
-          >
-            Cadastre-se
-          </ButtonSecondary>
-        </div>
-      </FormLogin>
+          <ButtonPrimary size="small" type="submit">
+            Entrar
+          </ButtonPrimary>
+          <div className="boxRegister">
+            <ThemeParagraph>Ainda não possui uma conta?</ThemeParagraph>
+            <ButtonSecondary
+              size="big"
+              type="button"
+              onClick={() => goRegister()}
+            >
+              Cadastre-se
+            </ButtonSecondary>
+          </div>
+        </FormLogin>
+      </motion.div>
     </Container>
   );
 };

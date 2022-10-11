@@ -31,7 +31,7 @@ export const FormRegister = styled.form`
       justify-content: flex-start;
       gap: 2px;
       
-      color: #9b1414;
+      color: var(--message-error);
       font-size: 13px;
       margin: 3px 0 0 6px;
 
@@ -40,11 +40,12 @@ export const FormRegister = styled.form`
       }
     }
 
-    svg{
+    & > svg{
       position: absolute;
       right: 5px;
       top: 17px;
       cursor: pointer;
+      color: var(--grey-5)
     }
  
     input{
@@ -133,6 +134,8 @@ export const FormRegister = styled.form`
   button{
     width: 85%;
     height: 30px;
+
+    margin-top: 15px;
     
     background: var(--color-primary-dark);
     color: var(--grey-5);
@@ -154,14 +157,14 @@ export const Box = styled.div`
         return css`
             flex-direction: row;
             justify-content: space-between;
-            width: 30%;
+            width: 300px;
             min-height: 40px;
         `;
       case "boxLogoLogin":
         return css`
             flex-direction: row;
             justify-content: center;
-            width: 30%;
+            width: 300px;
             min-height: 40px;
         `;
       case "boxForm":

@@ -107,6 +107,14 @@ export const ButtonNegative = styled.button`
   font-size: var(--fontSize-button);
   line-height: var(--lineHei-button);
 
+  transition: 0.5s;
+
+  :hover {
+    filter: brightness(1.2);
+    transform: scale(1.02);
+    /* border: 1px solid var(--grey-4); */
+  }
+
   ${({ size }) => {
     switch (size) {
       case "big":

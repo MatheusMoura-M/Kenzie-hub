@@ -32,7 +32,7 @@ export const GlobalStyle = createGlobalStyle`
       --color-primary: #FF577F;
       --color-primary-2: #FF427F;
       --color-primary-dark: #59323F;
-      --btn-remove: #f11616d9;
+      --message-error: #e12525;
       --black: #000000;
       --grey-1: #121214;
       --grey-2: #212529;
@@ -121,7 +121,13 @@ export const Container = styled(BaseTag)`
       case "large":
         return css`
           min-height: 100vh;
-          ;
+        `;
+      case "section":
+        return css`
+          min-height: 100vh;
+          gap: 12px;
+          margin: 10px; 
+          width: 95%;
         `;
       default:
         return false;
