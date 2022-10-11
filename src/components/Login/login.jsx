@@ -18,7 +18,7 @@ import { AuthContext } from "../../Contexts/AuthContext";
 const Login = () => {
   const [isShowPass, setIsShowPass] = useState(false);
 
-  const { onSubmit } = useContext(AuthContext);
+  const { onSubmitFunction } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const {
@@ -52,7 +52,7 @@ const Login = () => {
         <FormLogin
           isShowPass={isShowPass}
           classs="formLogin"
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onSubmitFunction)}
         >
           <ThemeTitle>Login</ThemeTitle>
 

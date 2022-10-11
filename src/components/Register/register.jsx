@@ -28,16 +28,15 @@ const Register = () => {
   });
 
   const onSubmit = async (data) => {
-    Apii.post("users", data)
-      .then((resp) => {
+    try {
+      await Apii.post("users", data)
         toast.success("Usuário cadastrado");
         navigate("/");
-      })
-      .catch((err) => {
+    } catch (error) {
         err.response.data.message[0].includes("password")
           ? toast.error("Senha precisa de no mínimo 6 caracters")
           : toast.error("Email já existe");
-      });
+      }
   };
 
   return (
@@ -81,7 +80,7 @@ const Register = () => {
               <label htmlFor="email">Email</label>
               <p>
                 {errors.email && <RiErrorWarningFill />}
-                {errors.name?.message}
+                {errors.email?.message}
               </p>
             </div>
 

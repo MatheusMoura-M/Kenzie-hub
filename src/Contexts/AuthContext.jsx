@@ -16,43 +16,43 @@ const AuthProvider = ({ children }) => {
 
       if (token) {
         try {
-          const { data } = await Apii.get("/profile");
+          const { data } = await Apii.get("profile");
           setUser(data);
           navigate("/dashboard");
-          
         } catch (error) {
           console.error(error);
         }
       }
-      setLoading(false)
+      setLoading(false);
     }
 
     loadUser();
   }, []);
 
-  const onSubmit = (data) => {
-    Apii.post("sessions", data)
-      .then((resp) => {
-          setLoading(true)
-          window.localStorage.clear();
-          window.localStorage.setItem("@Token", resp.data.token);
-          window.localStorage.setItem("@UserId", resp.data.user.id);
-          setUser(resp.data.user)
-          navigate("/dashboard");
-      })
-      .catch((err) => {
-        toast.error("Combinação de email/senha incorreta");
-      })
-      .finally(() => {
-        setLoading(false)
-      });
+  const onSubmitFunction = async (data) => {
+    console.log(data);
+    try {
+      const resp = await Apii.post("sessions", data);
+      setLoading(true);
+
+      window.localStorage.clear();
+      window.localStorage.setItem("@Token", resp.data.token);
+      window.localStorage.setItem("@UserId", resp.data.user.id);
+      
+      setUser(resp.data.user);
+      navigate("/dashboard");
+    } catch (error) {
+      toast.error("Combinação de email/senha incorreta");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  return(
-    <AuthContext.Provider value={{user, setUser, loading, onSubmit}}>
+  return (
+    <AuthContext.Provider value={{ user, setUser, loading, onSubmitFunction }}>
       {children}
     </AuthContext.Provider>
-  )
+  );
 };
 
-export default AuthProvider
+export default AuthProvider;
