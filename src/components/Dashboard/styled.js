@@ -37,7 +37,7 @@ export const Header = styled.header`
 
   border-bottom: 1px solid var(--grey-3); 
   
-  div{
+  .boxHeaderMain{
     display:flex; 
     flex-direction: row;
     align-items: center; 
