@@ -14,9 +14,7 @@ const Dash = () => {
   const { user, setUser, loading } = useContext(AuthContext);
 
   if (loading) {
-    <>
-      <LoadingPage />
-    </>;
+     return  <LoadingPage />;
   }
 
   const Logout = () => {

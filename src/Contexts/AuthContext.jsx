@@ -16,17 +16,15 @@ const AuthProvider = ({ children }) => {
 
       if (token) {
         try {
-          setLoading(true)
           const { data } = await Apii.get("/profile");
-
           setUser(data);
           navigate("/dashboard");
-          setLoading(false)
+          
         } catch (error) {
           console.error(error);
-          setLoading(false)
         }
       }
+      setLoading(false)
     }
 
     loadUser();
