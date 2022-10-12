@@ -39,6 +39,11 @@ export const ButtonPrimary = styled.button`
           width: 85%;
           height: 30px;
         `;
+      case "btnModal":
+        return css`
+          width: 100%;
+          height: 30px;
+        `;
       default:
         return false;
     }
@@ -50,19 +55,19 @@ export const ButtonSecondary = styled.button`
   background: var(--grey-4);
   border: 2px solid var(--grey-3);
   color: var(--grey-1);
-
+  
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
+  
   font-family: var(--font-family);
   font-weight: var(--fontWei-button);
   font-size: var(--fontSize-button);
   line-height: var(--lineHei-button);
-
+  
   transition: 0.5s;
-
+  
   :hover {
     opacity: 1;
     background: var(--grey-3);
@@ -70,18 +75,30 @@ export const ButtonSecondary = styled.button`
     border: 1px solid var(--grey-4);
     color: var(--grey-4);
   }
-
+  
   ${({ size }) => {
     switch (size) {
       case "big":
         return css`
           width: 100%;
           height: 30px;
-        `;
+          `;
       case "small":
         return css`
           width: 80px;
           height: 30px;
+          `;
+      case "add":
+        return css`
+          width: 35px;
+          height: 25px;
+
+          background: var(--grey-2);
+          color: var(--grey-5);
+          
+          font-family: var(--font-family);
+          font-size: 20px;
+          font-weight: 500;
         `;
       default:
         return false;

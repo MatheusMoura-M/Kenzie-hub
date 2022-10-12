@@ -20,9 +20,6 @@ export const Nav = styled.nav`
     width: 80%;
     max-width: 80%;
     height: 40px;
-  
-    padding: 0 10px;
-   
   }
 `
 
@@ -47,8 +44,6 @@ export const Header = styled.header`
     max-width: 80%;
     height: 100%;
   
-    padding: 0 10px;
-
     @media (max-width:700px) {
       align-items: flex-start;
       justify-content: center;
@@ -61,9 +56,9 @@ export const Header = styled.header`
 
 export const BoxMain = styled.div`
   display:flex; 
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start; 
-  justify-content: center;
+  justify-content: space-between;
   gap: 25px;
 
   margin-top: 25px;

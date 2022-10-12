@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { ButtonSecondary } from "../../styles/buttons";
 import { Container } from "../../styles/global";
@@ -8,13 +8,15 @@ import { AuthContext } from "../../Contexts/AuthContext";
 import { motion } from "framer-motion";
 import LoadingPage from "../Loading/loading";
 import { BoxMain, Header, Nav } from "./styled";
+import { TechModal } from "../TechModal";
 
 const Dash = () => {
   const navigate = useNavigate();
   const { user, setUser, loading } = useContext(AuthContext);
+  const [showModal, setShowModal] = useState(false)
 
   if (loading) {
-     return  <LoadingPage />;
+    return <LoadingPage />;
   }
 
   const Logout = () => {
@@ -25,10 +27,10 @@ const Dash = () => {
 
   return user ? (
     <>
-      <motion.div 
+      <motion.div
         animate={{ opacity: [0, 1], width: "100%", height: "100vh" }}
-        exit={{ opacity: 0}}
-        transition={{ duration: .8 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.8 }}
       >
         <Nav>
           <div>
@@ -47,12 +49,10 @@ const Dash = () => {
         <Container tag="main" size="default">
           <BoxMain>
             <ThemeTitle size="medium">
-              Que pena! Estamos em desenvolvimento :(
+              Tecnologias
             </ThemeTitle>
-            <ThemeSpan size="light">
-              Nossa aplicação está em desenvolvimento, em breve teremos
-              novidades
-            </ThemeSpan>
+            <ButtonSecondary size="add">+</ButtonSecondary>
+            <TechModal/>
           </BoxMain>
         </Container>
       </motion.div>

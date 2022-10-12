@@ -6,17 +6,22 @@ export const ThemeTitle = styled.h2`
   line-height: var(--lineHei-title);
   font-size: var(--fontSize-title);
   color: var(--grey-5);
-
+  
   ${({ size }) => {
     switch (size) {
       case "small":
         return css`
-          font-size: 14px;
+          font-size: var(--fontSize-title-3);
           line-height: 22px;
-        `;
+          `;
       case "medium":
         return css`
-          font-size: 16px;
+          font-size: var(--fontSize-title-2);
+          line-height: 22px;
+          `;
+      case "titleModal":
+        return css`
+          font-size: var(--fontSize-title-2);
           line-height: 22px;
         `;
       default:
