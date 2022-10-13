@@ -5,7 +5,7 @@ import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
 import { Modal } from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { SchemaTech } from "../validations/tech";
+import { SchemaTech } from "../../validations/tech";
 import { TechContext } from "../../Contexts/TechContext";
 
 export const TechModal = () => {

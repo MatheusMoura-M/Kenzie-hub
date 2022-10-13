@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Container } from "../../styles/global";
 import { FormRegister, Box } from "./styled";
 import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
-import SchemaRegister from "../validations/registerUser";
+import SchemaRegister from "../../validations/registerUser";
 import Apii from "../../services/api";
 import { toast } from "react-toastify";
 import { HiEye, HiEyeOff } from "react-icons/hi";

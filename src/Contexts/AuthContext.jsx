@@ -9,6 +9,7 @@ const token = localStorage.getItem("@Token");
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [techsUser, setTechsUser] = useState(null);
   const [techs, setTechs] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, loading, onSubmitFunction, techs}}
+      value={{ user, setUser, loading, onSubmitFunction, techs, setTechs, techsUser, setTechsUser}}
     >
       {children}
     </AuthContext.Provider>

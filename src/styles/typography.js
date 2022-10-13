@@ -36,12 +36,16 @@ export const ThemeParagraph = styled.p`
   font-weight: var(--fontWei-headline);
   line-height: var(--lineHei-headline);
   color: var(--grey-4);
-
+  
   ${({ size }) => {
     switch (size) {
       case "small":
         return css`
           font-size: 10px;
+          `;
+      case "titleCard":
+        return css`
+          color: var(--grey-5);
         `;
       default:
         return false;

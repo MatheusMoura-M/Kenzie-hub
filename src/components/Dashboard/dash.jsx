@@ -2,18 +2,19 @@ import React, { useContext, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { ButtonSecondary } from "../../styles/buttons";
 import { Container } from "../../styles/global";
-import { ThemeParagraph, ThemeSpan, ThemeTitle } from "../../styles/typography";
+import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
 import Logo from "../../../public/assets/Logo.svg";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { TechContext } from "../../Contexts/TechContext";
 import { motion } from "framer-motion";
 import LoadingPage from "../Loading/loading";
-import { BoxMain, Header, Nav } from "./styled";
+import { BoxHeaderMain, Header, Nav, UlMain } from "./styled";
 import { TechModal } from "../TechModal";
+import { Tech } from "../Techs";
 
 const Dash = () => {
   const navigate = useNavigate();
-  const { user, setUser, loading } = useContext(AuthContext);
+  const { user, setUser, loading, techs } = useContext(AuthContext);
   const { isShowModal, setIsShowModal } = useContext(TechContext);
 
   if (loading) {
@@ -52,13 +53,18 @@ const Dash = () => {
           </div>
         </Header>
         <Container tag="main" size="default">
-          <BoxMain>
+          <BoxHeaderMain>
             <ThemeTitle size="medium">Tecnologias</ThemeTitle>
             <ButtonSecondary onClick={() => showModal()} size="add">
               +
             </ButtonSecondary>
             {isShowModal && <TechModal />}
-          </BoxMain>
+          </BoxHeaderMain>
+          <UlMain>
+            {techs.map((tech) => (
+              <Tech key={tech.id} tech={tech}/>
+            ))}
+          </UlMain>
         </Container>
       </motion.div>
     </>
