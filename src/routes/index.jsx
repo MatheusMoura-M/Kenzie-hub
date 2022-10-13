@@ -12,7 +12,7 @@ const RoutesMain = () => {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dash />} />
-        <Route path="*" element={<Navigate to={"/"}/>} />
+        {/* <Route path="*" element={<Navigate to={"/"}/>} /> */}
       </Routes>
     </AnimatePresence>
   );

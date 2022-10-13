@@ -1,16 +1,16 @@
 import React from "react";
 import RoutesMain from "./routes";
 import { ToastContainer } from "react-toastify";
-import AuthProvider from "./Contexts/AuthContext";
+import TechProvider from "./Contexts/TechContext";
 import "react-toastify/dist/ReactToastify.min.css";
 import "./styles/App.css";
 
 function App() {
   return (
     <div className="App">
-      <AuthProvider>
-        <RoutesMain />
-      </AuthProvider>
+        <TechProvider>
+          <RoutesMain />
+        </TechProvider>
 
       <ToastContainer
         position="top-right"

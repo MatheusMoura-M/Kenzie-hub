@@ -5,6 +5,7 @@ import { Container } from "../../styles/global";
 import { ThemeParagraph, ThemeSpan, ThemeTitle } from "../../styles/typography";
 import Logo from "../../../public/assets/Logo.svg";
 import { AuthContext } from "../../Contexts/AuthContext";
+import { TechContext } from "../../Contexts/TechContext";
 import { motion } from "framer-motion";
 import LoadingPage from "../Loading/loading";
 import { BoxMain, Header, Nav } from "./styled";
@@ -13,7 +14,7 @@ import { TechModal } from "../TechModal";
 const Dash = () => {
   const navigate = useNavigate();
   const { user, setUser, loading } = useContext(AuthContext);
-  const [showModal, setShowModal] = useState(false)
+  const { isShowModal, setIsShowModal } = useContext(TechContext);
 
   if (loading) {
     return <LoadingPage />;
@@ -23,6 +24,10 @@ const Dash = () => {
     setUser();
     window.localStorage.clear();
     navigate("/");
+  };
+
+  const showModal = () => {
+    setIsShowModal(true);
   };
 
   return user ? (
@@ -48,11 +53,11 @@ const Dash = () => {
         </Header>
         <Container tag="main" size="default">
           <BoxMain>
-            <ThemeTitle size="medium">
-              Tecnologias
-            </ThemeTitle>
-            <ButtonSecondary size="add">+</ButtonSecondary>
-            <TechModal/>
+            <ThemeTitle size="medium">Tecnologias</ThemeTitle>
+            <ButtonSecondary onClick={() => showModal()} size="add">
+              +
+            </ButtonSecondary>
+            {isShowModal && <TechModal />}
           </BoxMain>
         </Container>
       </motion.div>

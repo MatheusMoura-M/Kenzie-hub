@@ -5,19 +5,22 @@ import Apii from "../services/api";
 
 export const AuthContext = createContext({});
 
+const token = localStorage.getItem("@Token");
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [techs, setTechs] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     async function loadUser() {
-      const token = localStorage.getItem("@Token");
-
+  
       if (token) {
         try {
           const { data } = await Apii.get("profile");
           setUser(data);
+          setTechs(data.techs)
           navigate("/dashboard");
         } catch (error) {
           console.error(error);
@@ -25,12 +28,10 @@ const AuthProvider = ({ children }) => {
       }
       setLoading(false);
     }
-
     loadUser();
   }, []);
 
   const onSubmitFunction = async (data) => {
-    console.log(data);
     try {
       const resp = await Apii.post("sessions", data);
       setLoading(true);
@@ -38,7 +39,7 @@ const AuthProvider = ({ children }) => {
       window.localStorage.clear();
       window.localStorage.setItem("@Token", resp.data.token);
       window.localStorage.setItem("@UserId", resp.data.user.id);
-      
+
       setUser(resp.data.user);
       navigate("/dashboard");
     } catch (error) {
@@ -49,7 +50,9 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, loading, onSubmitFunction }}>
+    <AuthContext.Provider
+      value={{ user, setUser, loading, onSubmitFunction, techs}}
+    >
       {children}
     </AuthContext.Provider>
   );

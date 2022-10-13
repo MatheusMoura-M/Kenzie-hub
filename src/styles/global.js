@@ -40,6 +40,7 @@ export const GlobalStyle = createGlobalStyle`
       --grey-4: #868E96;
       --grey-5: #F8F9FA;
       --opaco: rgb(0 0 0 / 93%);
+      --opaco-2: rgb(0 0 0 / 80%);
       --white: #ffffff;
       --color-success: #3FE864;
       --color-fail: #E83F5B;

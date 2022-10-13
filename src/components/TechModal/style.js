@@ -17,7 +17,7 @@ export const Modal = styled.div`
     width: 100% auto;
     height: 100vh;
 
-    background-color: var(--opaco);
+    background-color: var(--opaco-2);
   }
 
   .content {
@@ -26,51 +26,52 @@ export const Modal = styled.div`
     height: 40%;
 
     position: relative;
-    
+
     background: var(--grey-2);
-  
-    border-radius: .3rem;
+
+    border-radius: 0.2rem;
   }
-  
-  .boxTitle{
+
+  .boxTitle {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    
+
     height: 15%;
-    
+
     padding: 10px 20px;
-    
+
     background: var(--grey-3);
-    border-radius: .3rem .3rem 0 0;
-    
-    button{
+    border-radius: 0.2rem 0.2rem 0 0;
+
+    button {
       position: absolute;
       top: 10px;
       right: 10px;
-      
-      color: var(--grey-4)
+
+      color: var(--grey-4);
     }
   }
-  
-  .boxContent{
+
+  .boxContent {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    
+
     height: 85%;
-    
+
     padding: 10px 20px;
 
-    & > div:nth-child(1){
+    & > div:nth-child(1) {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap:7px;
-      
-      input{
+      gap: 7px;
+
+      input {
         background-color: var(--grey-3);
         color: var(--grey-5);
+        border-radius: 0.2rem;
 
         font-size: 14px;
 
@@ -79,21 +80,21 @@ export const Modal = styled.div`
         height: 30px;
       }
     }
-    
-    & > div:nth-child(2){
+
+    & > div:nth-child(2) {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap:7px;
+      gap: 7px;
       margin-bottom: 10px;
-      
-      select{
+
+      select {
         background-color: var(--grey-3);
         color: var(--grey-5);
+        border-radius: 0.2rem;
 
         height: 30px;
       }
     }
-
   }
 `;
