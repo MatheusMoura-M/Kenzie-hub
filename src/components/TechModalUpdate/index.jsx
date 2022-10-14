@@ -43,7 +43,16 @@ export const TechModalUpdate = () => {
           <form onSubmit={handleSubmit(updateTechs)} className="boxContent">
             <div>
               <ThemeParagraph>Nome da tecnologia</ThemeParagraph>
+<<<<<<< HEAD
               <input type="text" disabled {...register("title")} />
+=======
+              <input
+                type="text"
+                disabled
+                value={inputValue}
+                {...register("title")}
+              />
+>>>>>>> ede77676faca14f042dd500dabe57e7e894aed6e
             </div>
             <div>
               <ThemeParagraph>Selecionar status</ThemeParagraph>
