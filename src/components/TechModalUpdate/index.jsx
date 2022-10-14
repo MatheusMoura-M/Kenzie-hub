@@ -50,12 +50,12 @@ export const TechModalUpdate = () => {
                 type="text"
                 disabled
                 value={inputValue}
+                {...register("title")}
               />
             </div>
             <div>
               <ThemeParagraph>Selecionar status</ThemeParagraph>
               <select {...register("status")}>
-                {/* <option value=""></option> */}
                 <option value="Iniciante">Iniciante</option>
                 <option value="Intermediário">Intermediário</option>
                 <option value="Avançado">Avançado</option>
