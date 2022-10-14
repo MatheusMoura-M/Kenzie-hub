@@ -24,19 +24,19 @@ export const TechModalCreate = () => {
       <div className="overlay">
         <div className="content">
           <div className="boxTitle">
-            <ThemeTitle size="titleModal">Cadastrar Tecnologia</ThemeTitle>
+            <ThemeTitle size="titleModal">Cadastrar tecnologia</ThemeTitle>
             <button onClick={() => setIsShowModalCreate(false)}>
               <MdClose size={18} />
             </button>
           </div>
           <form onSubmit={handleSubmit(addTechs)} className="boxContent">
             <div>
-              <ThemeParagraph>Nome</ThemeParagraph>
+              <ThemeParagraph>Nome da tecnologia</ThemeParagraph>
               <input type="text" {...register("title")} />
               {errors.name?.message}
             </div>
             <div>
-              <ThemeParagraph>Selecionar Status</ThemeParagraph>
+              <ThemeParagraph>Selecionar status</ThemeParagraph>
               <select {...register("status")}>
                 {/* <option value=""></option> */}
                 <option value="Iniciante">Iniciante</option>

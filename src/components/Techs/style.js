@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 export const Card = styled.li`
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   background: var(--grey-1);
   border-radius: 0.15rem;
-  cursor: pointer;
 
   padding: 10px;
 
@@ -19,10 +20,12 @@ export const Card = styled.li`
     align-items: flex-start;
     justify-content: space-between;
 
-    width: 30%;
-    max-width: 100px;
+    width: 35%;
+    max-width: 120px;
 
     svg {
+      position: absolute;
+
       color: var(--grey-5);
 
       opacity: 0.5;
@@ -30,6 +33,18 @@ export const Card = styled.li`
 
       &:hover {
         opacity: 1;
+      }
+    }
+
+    .btn-1 {
+      svg {
+        right: 30px;
+      }
+    }
+
+    .btn-2 {
+      svg {
+        right: 10px;
       }
     }
   }

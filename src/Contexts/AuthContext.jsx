@@ -59,7 +59,7 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     }
     loadUser();
-  }, []);
+  }, [loading]);
 
   return (
     <AuthContext.Provider
@@ -67,6 +67,7 @@ const AuthProvider = ({ children }) => {
         user,
         setUser,
         loading,
+        setLoading,
         Register,
         Login,
         techs,

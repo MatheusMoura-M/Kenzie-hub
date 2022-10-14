@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ButtonNegative } from "../../styles/buttons";
 import { MdClose } from "react-icons/md";
 import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
@@ -7,36 +7,53 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SchemaTech } from "../../validations/tech";
 import { TechContext } from "../../Contexts/TechContext";
+import Apii from "../../services/api";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 export const TechModalUpdate = () => {
-  const { setIsShowModalUpdate, addTechs } = useContext(TechContext);
+  const { setIsShowModalUpdate, techSelected } = useContext(TechContext);
+  const { setLoading } = useContext(AuthContext);
+  const [inputValue, setInputValue] = useState(techSelected.title);
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm({
-    resolver: yupResolver(SchemaTech),
-  });
+    defaultValues: { status: techSelected.status }
+  })
 
+  const updateTechs = async(data) => {
+    try {
+      await Apii.put(`users/techs/${techSelected.id}`, data)
+   
+      setIsShowModalUpdate(false)
+      setLoading(true)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  
   return (
     <Modal>
       <div className="overlay">
         <div className="content">
           <div className="boxTitle">
-            <ThemeTitle size="titleModal">Cadastrar Tecnologia</ThemeTitle>
+            <ThemeTitle size="titleModal">Atualizar tecnologia</ThemeTitle>
             <button onClick={() => setIsShowModalUpdate(false)}>
               <MdClose size={18} />
             </button>
           </div>
-          <form onSubmit={handleSubmit(addTechs)} className="boxContent">
+          <form onSubmit={handleSubmit(updateTechs)} className="boxContent">
             <div>
-              <ThemeParagraph>Nome</ThemeParagraph>
-              <input type="text" {...register("title")} />
-              {errors.name?.message}
+              <ThemeParagraph>Nome da tecnologia</ThemeParagraph>
+              <input
+                type="text"
+                disabled
+                value={inputValue}
+              />
             </div>
             <div>
-              <ThemeParagraph>Selecionar Status</ThemeParagraph>
+              <ThemeParagraph>Selecionar status</ThemeParagraph>
               <select {...register("status")}>
                 {/* <option value=""></option> */}
                 <option value="Iniciante">Iniciante</option>
