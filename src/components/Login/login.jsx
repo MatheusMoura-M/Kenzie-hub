@@ -36,17 +36,17 @@ const Login = () => {
   return (
     <Container tag="main" size="large">
       <motion.div
-        animate={{ opacity: [0, 0.8, 1], x: [-10, 4, 0], y: [-10, 4, 0] }}
-        exit={{ opacity: 0, x: -20 }}
-        transition={{ duration: 1 }}
+        animate={{ opacity: [0, 1], x: [-10, 4, 0], y: [-10, 4, 0] }}
+        exit={{ opacity: 0, x: -10 }}
+        transition={{ ease: "easeInOut", duration: 1 }}
       >
         <Box classs="boxLogoLogin">
           <img src={Logo} alt="Logo" />
         </Box>
       </motion.div>
       <motion.div
-        animate={{ opacity: [0, 0.8, 1], x: [-10, 4, 0], y: [-10, 4, 0] }}
-        exit={{ opacity: 0, x: -20 }}
+        animate={{ opacity: [0, 1], x: [-10, 4, 0], y: [-10, 4, 0] }}
+        exit={{ opacity: 0, x: -10 }}
         transition={{ ease: "easeInOut", duration: 1 }}
       >
         <FormLogin

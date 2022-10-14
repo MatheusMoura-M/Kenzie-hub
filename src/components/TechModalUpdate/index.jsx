@@ -1,38 +1,35 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { ButtonNegative } from "../../styles/buttons";
 import { MdClose } from "react-icons/md";
 import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
 import { Modal } from "../TechModalCreate/style";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { SchemaTech } from "../../validations/tech";
 import { TechContext } from "../../Contexts/TechContext";
 import Apii from "../../services/api";
 import { AuthContext } from "../../Contexts/AuthContext";
+import { toast } from "react-toastify";
 
 export const TechModalUpdate = () => {
   const { setIsShowModalUpdate, techSelected } = useContext(TechContext);
   const { setLoading } = useContext(AuthContext);
-  const [inputValue, setInputValue] = useState(techSelected.title);
 
-  const {
-    register,
-    handleSubmit,
-  } = useForm({
-    defaultValues: { status: techSelected.status }
-  })
+  const { register, handleSubmit } = useForm({
+    defaultValues: { title: techSelected.title, status: techSelected.status },
+  });
 
-  const updateTechs = async(data) => {
+  const updateTechs = async (data) => {
     try {
-      await Apii.put(`users/techs/${techSelected.id}`, data)
-   
-      setIsShowModalUpdate(false)
-      setLoading(true)
+      await Apii.put(`users/techs/${techSelected.id}`, data);
+
+      setIsShowModalUpdate(false);
+      setLoading(true);
+
+      toast.success("Tecnologia atualizada com sucesso");
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
-  
+  };
+
   return (
     <Modal>
       <div className="overlay">
@@ -46,16 +43,11 @@ export const TechModalUpdate = () => {
           <form onSubmit={handleSubmit(updateTechs)} className="boxContent">
             <div>
               <ThemeParagraph>Nome da tecnologia</ThemeParagraph>
-              <input
-                type="text"
-                disabled
-                value={inputValue}
-              />
+              <input type="text" disabled {...register("title")} />
             </div>
             <div>
               <ThemeParagraph>Selecionar status</ThemeParagraph>
               <select {...register("status")}>
-                {/* <option value=""></option> */}
                 <option value="Iniciante">Iniciante</option>
                 <option value="Intermediário">Intermediário</option>
                 <option value="Avançado">Avançado</option>

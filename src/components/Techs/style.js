@@ -20,9 +20,9 @@ export const Card = styled.li`
     align-items: flex-start;
     justify-content: space-between;
 
-    width: 35%;
+    padding-right: 45px;
     max-width: 120px;
-
+    
     svg {
       position: absolute;
 

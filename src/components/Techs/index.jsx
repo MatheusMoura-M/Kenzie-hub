@@ -7,7 +7,7 @@ import { TechContext } from "../../Contexts/TechContext";
 
 export const Tech = ({ tech }) => {
   const { deleteTechs, gett } = useContext(TechContext);
-  
+
   return (
     <Card>
       <ThemeParagraph size="titleCard">{tech.title}</ThemeParagraph>
@@ -17,7 +17,7 @@ export const Tech = ({ tech }) => {
           <IoMdTrash size={16} />
         </button>
         <button className="btn-2" onClick={() => gett(tech)}>
-          <MdMenuOpen size={16}/>
+          <MdMenuOpen size={16} />
         </button>
       </div>
     </Card>

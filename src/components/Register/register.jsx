@@ -30,9 +30,9 @@ const Register = () => {
   return (
     <Container tag="main" size="large">
       <motion.div
-        animate={{ opacity: [0, 0.8, 1], x: [-5, 3, 0], y: [-5, 3, 0] }}
+        animate={{ opacity: [0, 1], x: [-5, 0], y: [-5, 0] }}
         exit={{ opacity: 0, x: -5, y: -5 }}
-        transition={{ duration: 1 }}
+        transition={{ease: "easeInOut", duration: .5 }}
       >
         <Container tag="section" size="section">
           <Box classs="boxLogo">

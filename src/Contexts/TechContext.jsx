@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 import Apii from "../services/api";
 import { AuthContext } from "./AuthContext";
@@ -11,10 +11,9 @@ const TechProvider = ({ children }) => {
   const [isShowModalUpdate, setIsShowModalUpdate] = useState(false);
   const [techSelected, setTechSelected] = useState({});
 
-  
   const gett = (tech) => {
     setIsShowModalUpdate(true);
-    setTechSelected(tech)
+    setTechSelected(tech);
   };
 
   const addTechs = async (data) => {

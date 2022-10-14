@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { ButtonSecondary } from "../../styles/buttons";
 import { Container } from "../../styles/global";
@@ -16,7 +16,8 @@ import { TechModalUpdate } from "../TechModalUpdate";
 const Dash = () => {
   const navigate = useNavigate();
   const { user, setUser, loading, techs } = useContext(AuthContext);
-  const { isShowModalCreate, setIsShowModalCreate, isShowModalUpdate, setIsShowModalUpdate } = useContext(TechContext);
+  const { isShowModalCreate, setIsShowModalCreate, isShowModalUpdate } =
+    useContext(TechContext);
 
   if (loading) {
     return <LoadingPage />;
@@ -31,7 +32,8 @@ const Dash = () => {
   return user ? (
     <>
       <motion.div
-        animate={{ opacity: [0, 1], width: "100%", height: "100vh" }}
+        initial={{ width: "100%", height: "100vh" }}
+        animate={{ opacity: [0, 1] }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8 }}
       >
@@ -52,15 +54,18 @@ const Dash = () => {
         <Container tag="main" size="default">
           <BoxHeaderMain>
             <ThemeTitle size="medium">Tecnologias</ThemeTitle>
-            <ButtonSecondary onClick={() => setIsShowModalCreate(true)} size="add">
+            <ButtonSecondary
+              onClick={() => setIsShowModalCreate(true)}
+              size="add"
+            >
               +
             </ButtonSecondary>
             {isShowModalCreate && <TechModalCreate />}
           </BoxHeaderMain>
           <UlMain>
-            {isShowModalUpdate && <TechModalUpdate/>}
+            {isShowModalUpdate && <TechModalUpdate />}
             {techs.map((tech) => (
-              <Tech key={tech.id} tech={tech}/>
+              <Tech key={tech.id} tech={tech} />
             ))}
           </UlMain>
         </Container>
