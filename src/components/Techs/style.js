@@ -7,6 +7,7 @@ export const Card = styled.li`
 
   background: var(--grey-1);
   border-radius: 0.15rem;
+  cursor: pointer;
 
   padding: 10px;
 
@@ -15,10 +16,10 @@ export const Card = styled.li`
 
   & > div {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
 
-    width: 28%;
+    width: 30%;
     max-width: 100px;
 
     svg {

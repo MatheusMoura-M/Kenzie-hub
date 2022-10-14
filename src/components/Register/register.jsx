@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,18 +6,18 @@ import { Container } from "../../styles/global";
 import { FormRegister, Box } from "./styled";
 import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
 import SchemaRegister from "../../validations/registerUser";
-import Apii from "../../services/api";
-import { toast } from "react-toastify";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { motion } from "framer-motion";
 import Logo from "../../../public/assets/Logo.svg";
 import { ButtonNegative } from "../../styles/buttons";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 const Register = () => {
   const navigate = useNavigate();
   const [isShowPass, setIsShowPass] = useState(false);
   const [isShowConfirmPass, setIsShowConfirmPass] = useState(false);
+  const { Register } = useContext(AuthContext);
 
   const {
     register,
@@ -26,18 +26,6 @@ const Register = () => {
   } = useForm({
     resolver: yupResolver(SchemaRegister),
   });
-
-  const onSubmit = async (data) => {
-    try {
-      await Apii.post("users", data)
-        toast.success("Usuário cadastrado");
-        navigate("/");
-    } catch (error) {
-        err.response.data.message[0].includes("password")
-          ? toast.error("Senha precisa de no mínimo 6 caracters")
-          : toast.error("Email já existe");
-      }
-  };
 
   return (
     <Container tag="main" size="large">
@@ -52,7 +40,7 @@ const Register = () => {
             <Link to="/">Voltar</Link>
           </Box>
 
-          <FormRegister onSubmit={handleSubmit(onSubmit)}>
+          <FormRegister onSubmit={handleSubmit(Register)}>
             <Box classs="boxForm">
               <ThemeTitle>Crie sua conta</ThemeTitle>
               <ThemeParagraph>Rápido e grátis, vamos nessa!!</ThemeParagraph>

@@ -144,6 +144,12 @@ export const ButtonNegative = styled.button`
           width: 100px;
           height: 30px;
         `;
+      case "update":
+        return css`
+          width: 100%;
+          height: 30px;
+          border-radius: 0.3rem;
+        `;
       default:
         return false;
     }

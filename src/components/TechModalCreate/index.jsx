@@ -8,8 +8,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SchemaTech } from "../../validations/tech";
 import { TechContext } from "../../Contexts/TechContext";
 
-export const TechModal = () => {
-  const { setIsShowModal, addTechs } = useContext(TechContext);
+export const TechModalCreate = () => {
+  const { setIsShowModalCreate, addTechs } = useContext(TechContext);
 
   const {
     register,
@@ -19,25 +19,17 @@ export const TechModal = () => {
     resolver: yupResolver(SchemaTech),
   });
 
-  const closeModal = () => {
-    setIsShowModal(false);
-  };
-
-  const submit = (data) => {
-    addTechs(data);
-  };
-
   return (
     <Modal>
       <div className="overlay">
         <div className="content">
           <div className="boxTitle">
             <ThemeTitle size="titleModal">Cadastrar Tecnologia</ThemeTitle>
-            <button onClick={() => closeModal()}>
+            <button onClick={() => setIsShowModalCreate(false)}>
               <MdClose size={18} />
             </button>
           </div>
-          <form onSubmit={handleSubmit(submit)} className="boxContent">
+          <form onSubmit={handleSubmit(addTechs)} className="boxContent">
             <div>
               <ThemeParagraph>Nome</ThemeParagraph>
               <input type="text" {...register("title")} />

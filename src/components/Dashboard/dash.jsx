@@ -9,13 +9,14 @@ import { TechContext } from "../../Contexts/TechContext";
 import { motion } from "framer-motion";
 import LoadingPage from "../Loading/loading";
 import { BoxHeaderMain, Header, Nav, UlMain } from "./styled";
-import { TechModal } from "../TechModal";
+import { TechModalCreate } from "../TechModalCreate";
 import { Tech } from "../Techs";
+import { TechModalUpdate } from "../TechModalUpdate";
 
 const Dash = () => {
   const navigate = useNavigate();
   const { user, setUser, loading, techs } = useContext(AuthContext);
-  const { isShowModal, setIsShowModal } = useContext(TechContext);
+  const { isShowModalCreate, setIsShowModalCreate, isShowModalUpdate, setIsShowModalUpdate } = useContext(TechContext);
 
   if (loading) {
     return <LoadingPage />;
@@ -25,10 +26,6 @@ const Dash = () => {
     setUser();
     window.localStorage.clear();
     navigate("/");
-  };
-
-  const showModal = () => {
-    setIsShowModal(true);
   };
 
   return user ? (
@@ -55,12 +52,13 @@ const Dash = () => {
         <Container tag="main" size="default">
           <BoxHeaderMain>
             <ThemeTitle size="medium">Tecnologias</ThemeTitle>
-            <ButtonSecondary onClick={() => showModal()} size="add">
+            <ButtonSecondary onClick={() => setIsShowModalCreate(true)} size="add">
               +
             </ButtonSecondary>
-            {isShowModal && <TechModal />}
+            {isShowModalCreate && <TechModalCreate />}
           </BoxHeaderMain>
           <UlMain>
+            {isShowModalUpdate && <TechModalUpdate/>}
             {techs.map((tech) => (
               <Tech key={tech.id} tech={tech}/>
             ))}

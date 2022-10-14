@@ -5,8 +5,6 @@ import Apii from "../services/api";
 
 export const AuthContext = createContext({});
 
-const token = localStorage.getItem("@Token");
-
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [techsUser, setTechsUser] = useState(null);
@@ -14,25 +12,19 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function loadUser() {
-  
-      if (token) {
-        try {
-          const { data } = await Apii.get("profile");
-          setUser(data);
-          setTechs(data.techs)
-          navigate("/dashboard");
-        } catch (error) {
-          console.error(error);
-        }
-      }
-      setLoading(false);
+  const Register = async (data) => {
+    try {
+      await Apii.post("users", data);
+      toast.success("Usuário cadastrado");
+      navigate("/");
+    } catch (error) {
+      err.response.data.message[0].includes("password")
+        ? toast.error("Senha precisa de no mínimo 6 caracters")
+        : toast.error("Email já existe");
     }
-    loadUser();
-  }, []);
+  };
 
-  const onSubmitFunction = async (data) => {
+  const Login = async (data) => {
     try {
       const resp = await Apii.post("sessions", data);
       setLoading(true);
@@ -50,9 +42,38 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("@Token");
+
+    async function loadUser() {
+      if (token) {
+        try {
+          const { data } = await Apii.get("profile");
+          setUser(data);
+          setTechs(data.techs);
+          navigate("/dashboard");
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      setLoading(false);
+    }
+    loadUser();
+  }, []);
+
   return (
     <AuthContext.Provider
-      value={{ user, setUser, loading, onSubmitFunction, techs, setTechs, techsUser, setTechsUser}}
+      value={{
+        user,
+        setUser,
+        loading,
+        Register,
+        Login,
+        techs,
+        setTechs,
+        techsUser,
+        setTechsUser,
+      }}
     >
       {children}
     </AuthContext.Provider>
