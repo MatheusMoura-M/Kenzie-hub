@@ -1,23 +1,24 @@
-import React, { useContext, useEffect, useState } from "react";
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/label-has-for */
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { HiEye, HiEyeOff } from "react-icons/hi";
+import { RiErrorWarningFill } from "react-icons/ri";
+import { motion } from "framer-motion";
 import { Container } from "../../styles/global";
 import { FormRegister, Box } from "./styled";
 import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
 import SchemaRegister from "../../validations/registerUser";
-import { HiEye, HiEyeOff } from "react-icons/hi";
-import { RiErrorWarningFill } from "react-icons/ri";
-import { motion } from "framer-motion";
 import Logo from "../../../public/assets/Logo.svg";
 import { ButtonNegative } from "../../styles/buttons";
 import { AuthContext } from "../../Contexts/AuthContext";
 
 const Register = () => {
-  const navigate = useNavigate();
   const [isShowPass, setIsShowPass] = useState(false);
   const [isShowConfirmPass, setIsShowConfirmPass] = useState(false);
-  const { Register } = useContext(AuthContext);
+  const { registerr } = useContext(AuthContext);
 
   const {
     register,
@@ -40,7 +41,7 @@ const Register = () => {
             <Link to="/">Voltar</Link>
           </Box>
 
-          <FormRegister onSubmit={handleSubmit(Register)}>
+          <FormRegister onSubmit={handleSubmit(registerr)}>
             <Box classs="boxForm">
               <ThemeTitle>Crie sua conta</ThemeTitle>
               <ThemeParagraph>Rápido e grátis, vamos nessa!!</ThemeParagraph>

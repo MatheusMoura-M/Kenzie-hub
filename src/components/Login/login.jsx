@@ -2,23 +2,23 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { HiEyeOff, HiEye } from "react-icons/hi";
+import { RiErrorWarningFill } from "react-icons/ri";
+import { motion } from "framer-motion";
 import { ButtonPrimary, ButtonSecondary } from "../../styles/buttons";
 import { Container } from "../../styles/global";
 import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
 import { Box } from "../Register/styled";
 import { FormLogin } from "./styled";
 import SchemaLogin from "../../validations/loginUser";
-import { HiEye } from "react-icons/hi";
-import { HiEyeOff } from "react-icons/hi";
-import { RiErrorWarningFill } from "react-icons/ri";
-import { motion } from "framer-motion";
+
 import Logo from "../../../public/assets/Logo.svg";
 import { AuthContext } from "../../Contexts/AuthContext";
 
 const Login = () => {
   const [isShowPass, setIsShowPass] = useState(false);
 
-  const { Login } = useContext(AuthContext);
+  const { loginn } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const {
@@ -52,7 +52,7 @@ const Login = () => {
         <FormLogin
           isShowPass={isShowPass}
           classs="formLogin"
-          onSubmit={handleSubmit(Login)}
+          onSubmit={handleSubmit(loginn)}
         >
           <ThemeTitle>Login</ThemeTitle>
 
