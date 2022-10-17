@@ -28,7 +28,6 @@ const AuthProvider = ({ children }) => {
     try {
       const resp = await Api.post("sessions", data);
 
-      window.localStorage.clear();
       window.localStorage.setItem("@Token", resp.data.token);
       window.localStorage.setItem("@UserId", resp.data.user.id);
       setUser(resp.data.user);
@@ -50,7 +49,6 @@ const AuthProvider = ({ children }) => {
           const { data } = await Api.get("profile");
           setUser(data);
           setTechs(data.techs);
-          navigate("/dashboard");
         } catch (err) {
           console.log(err);
         }
@@ -58,7 +56,7 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     }
     loadUser();
-  }, []);
+  }, [techs]);
 
   return (
     <AuthContext.Provider

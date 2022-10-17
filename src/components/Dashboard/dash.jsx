@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { ButtonSecondary } from "../../styles/buttons";
 import { Container } from "../../styles/global";

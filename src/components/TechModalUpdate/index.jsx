@@ -11,7 +11,6 @@ import { toast } from "react-toastify";
 
 export const TechModalUpdate = () => {
   const { setIsShowModalUpdate, techSelected } = useContext(TechContext);
-  const { setLoading } = useContext(AuthContext);
 
   const { register, handleSubmit } = useForm({
     defaultValues: { title: techSelected.title, status: techSelected.status },
