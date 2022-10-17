@@ -2,7 +2,7 @@ import axios from "axios";
 
 const token = window.localStorage.getItem("@Token")
 
-const Apii = axios.create({
+const Api = axios.create({
   baseURL: "https://kenziehub.herokuapp.com/",
   headers: {
     "Authorization": `Bearer ${token}`,
@@ -10,4 +10,4 @@ const Apii = axios.create({
   timeout: 5000,
 });
 
-export default Apii;
+export default Api;

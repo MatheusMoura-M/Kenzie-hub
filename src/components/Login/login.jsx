@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HiEyeOff, HiEye } from "react-icons/hi";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { motion } from "framer-motion";
@@ -18,7 +18,7 @@ import { AuthContext } from "../../Contexts/AuthContext";
 const Login = () => {
   const [isShowPass, setIsShowPass] = useState(false);
 
-  const { loginn } = useContext(AuthContext);
+  const { loginRequest } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const {
@@ -28,10 +28,6 @@ const Login = () => {
   } = useForm({
     resolver: yupResolver(SchemaLogin),
   });
-
-  const goRegister = () => {
-    navigate("/register");
-  };
 
   return (
     <Container tag="main" size="large">
@@ -52,7 +48,7 @@ const Login = () => {
         <FormLogin
           isShowPass={isShowPass}
           classs="formLogin"
-          onSubmit={handleSubmit(loginn)}
+          onSubmit={handleSubmit(loginRequest)}
         >
           <ThemeTitle>Login</ThemeTitle>
 
@@ -94,13 +90,7 @@ const Login = () => {
           </ButtonPrimary>
           <div className="boxRegister">
             <ThemeParagraph>Ainda não possui uma conta?</ThemeParagraph>
-            <ButtonSecondary
-              size="big"
-              type="button"
-              onClick={() => goRegister()}
-            >
-              Cadastre-se
-            </ButtonSecondary>
+            <Link to={"/register"}>Cadastre-se</Link>
           </div>
         </FormLogin>
       </motion.div>

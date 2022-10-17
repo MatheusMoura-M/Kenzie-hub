@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable jsx-a11y/label-has-for */
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -18,7 +16,7 @@ import { AuthContext } from "../../Contexts/AuthContext";
 const Register = () => {
   const [isShowPass, setIsShowPass] = useState(false);
   const [isShowConfirmPass, setIsShowConfirmPass] = useState(false);
-  const { registerr } = useContext(AuthContext);
+  const { registerRequest } = useContext(AuthContext);
 
   const {
     register,
@@ -41,7 +39,7 @@ const Register = () => {
             <Link to="/">Voltar</Link>
           </Box>
 
-          <FormRegister onSubmit={handleSubmit(registerr)}>
+          <FormRegister onSubmit={handleSubmit(registerRequest)}>
             <Box classs="boxForm">
               <ThemeTitle>Crie sua conta</ThemeTitle>
               <ThemeParagraph>Rápido e grátis, vamos nessa!!</ThemeParagraph>

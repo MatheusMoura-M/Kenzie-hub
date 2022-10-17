@@ -3,7 +3,7 @@ import { Container } from '../../styles/global'
 import styles from "./style.module.css"
 
 const LoadingPage = () => (
-    <Container tag="main">
+    <Container tag="main" size="loading">
        <div className={styles.loading}></div>
     </Container>
   )

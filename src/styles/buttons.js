@@ -129,7 +129,6 @@ export const ButtonNegative = styled.button`
   :hover {
     filter: brightness(1.2);
     transform: scale(1.02);
-    /* border: 1px solid var(--grey-4); */
   }
 
   ${({ size }) => {

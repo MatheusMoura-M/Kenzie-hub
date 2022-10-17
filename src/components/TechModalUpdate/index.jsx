@@ -5,7 +5,7 @@ import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
 import { Modal } from "../TechModalCreate/style";
 import { useForm } from "react-hook-form";
 import { TechContext } from "../../Contexts/TechContext";
-import Apii from "../../services/api";
+import Api from "../../services/api";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { toast } from "react-toastify";
 
@@ -19,10 +19,9 @@ export const TechModalUpdate = () => {
 
   const updateTechs = async (data) => {
     try {
-      await Apii.put(`users/techs/${techSelected.id}`, data);
+      await Api.put(`users/techs/${techSelected.id}`, data);
 
       setIsShowModalUpdate(false);
-      setLoading(true);
 
       toast.success("Tecnologia atualizada com sucesso");
     } catch (err) {

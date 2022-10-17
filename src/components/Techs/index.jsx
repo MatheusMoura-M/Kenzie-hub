@@ -6,7 +6,7 @@ import { MdMenuOpen } from "react-icons/md";
 import { TechContext } from "../../Contexts/TechContext";
 
 export const Tech = ({ tech }) => {
-  const { deleteTechs, gett } = useContext(TechContext);
+  const { deleteTechs, getTech } = useContext(TechContext);
 
   return (
     <Card>
@@ -16,7 +16,7 @@ export const Tech = ({ tech }) => {
         <button className="btn-1" onClick={() => deleteTechs(tech.id)}>
           <IoMdTrash size={16} />
         </button>
-        <button className="btn-2" onClick={() => gett(tech)}>
+        <button className="btn-2" onClick={() => getTech(tech)}>
           <MdMenuOpen size={16} />
         </button>
       </div>

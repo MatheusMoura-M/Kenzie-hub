@@ -130,6 +130,10 @@ export const Container = styled(BaseTag)`
           margin: 10px; 
           width: 95%;
         `;
+      case "loading":
+        return css`
+          min-height: 100vh;
+        `;
       default:
         return false;
     }

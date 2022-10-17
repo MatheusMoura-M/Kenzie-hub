@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
-import Apii from "../services/api";
+import Api from "../services/api";
 import { AuthContext } from "./AuthContext";
 
 export const TechContext = createContext({});
@@ -11,14 +11,14 @@ const TechProvider = ({ children }) => {
   const [isShowModalUpdate, setIsShowModalUpdate] = useState(false);
   const [techSelected, setTechSelected] = useState({});
 
-  const gett = (tech) => {
+  const getTech = (tech) => {
     setIsShowModalUpdate(true);
     setTechSelected(tech);
   };
 
   const addTechs = async (data) => {
     try {
-      const resp = await Apii.post("users/techs", data);
+      const resp = await Api.post("users/techs", data);
       setIsShowModalCreate(false);
       setTechs([...techs, resp.data]);
       toast.success("Tecnologia cadastrada com sucesso");
@@ -31,7 +31,7 @@ const TechProvider = ({ children }) => {
     const filtered = techs.filter((tech) => tech.id !== id);
 
     try {
-      await Apii.delete(`users/techs/${id}`);
+      await Api.delete(`users/techs/${id}`);
       setTechs(filtered);
       toast.success("Tecnologia deletada com sucesso");
     } catch (err) {
@@ -42,7 +42,7 @@ const TechProvider = ({ children }) => {
   return (
     <TechContext.Provider
       value={{
-        gett,
+        getTech,
         techSelected,
         techs,
         setTechs,

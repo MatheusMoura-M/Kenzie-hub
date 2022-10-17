@@ -1,41 +1,38 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Apii from "../services/api";
+import Api from "../services/api";
 
 export const AuthContext = createContext({});
 
-// eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [techsUser, setTechsUser] = useState(null);
   const [techs, setTechs] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const registerr = async (data) => {
+  const registerRequest = async (data) => {
     try {
-      await Apii.post("users", data);
+      await Api.post("users", data);
       toast.success("Usuário cadastrado");
       navigate("/");
     } catch (err) {
-      // eslint-disable-next-line no-unused-expressions
       err.response.data.message[0].includes("password")
         ? toast.error("Senha precisa de no mínimo 6 caracters")
         : toast.error("Email já existe");
     }
   };
 
-  const loginn = async (data) => {
+  const loginRequest = async (data) => {
+    setLoading(true);
     try {
-      const resp = await Apii.post("sessions", data);
-      setLoading(true);
+      const resp = await Api.post("sessions", data);
 
       window.localStorage.clear();
       window.localStorage.setItem("@Token", resp.data.token);
       window.localStorage.setItem("@UserId", resp.data.user.id);
-
       setUser(resp.data.user);
+      setTechs(resp.data.user.techs)
       navigate("/dashboard");
     } catch (error) {
       toast.error("Combinação de email/senha incorreta");
@@ -50,34 +47,30 @@ const AuthProvider = ({ children }) => {
     async function loadUser() {
       if (token) {
         try {
-          const { data } = await Apii.get("profile");
+          const { data } = await Api.get("profile");
           setUser(data);
           setTechs(data.techs);
           navigate("/dashboard");
         } catch (err) {
-          // eslint-disable-next-line no-console
           console.log(err);
         }
       }
       setLoading(false);
     }
     loadUser();
-  }, [loading]);
+  }, []);
 
   return (
     <AuthContext.Provider
-      // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         user,
         setUser,
         loading,
         setLoading,
-        registerr,
-        loginn,
+        registerRequest,
+        loginRequest,
         techs,
         setTechs,
-        techsUser,
-        setTechsUser,
       }}
     >
       {children}
