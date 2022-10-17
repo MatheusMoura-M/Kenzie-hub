@@ -5,6 +5,7 @@ import { AuthContext } from "./AuthContext";
 
 export const TechContext = createContext({});
 
+// eslint-disable-next-line react/prop-types
 const TechProvider = ({ children }) => {
   const { techs, setTechs } = useContext(AuthContext);
   const [isShowModalCreate, setIsShowModalCreate] = useState(false);
@@ -35,12 +36,14 @@ const TechProvider = ({ children }) => {
       setTechs(filtered);
       toast.success("Tecnologia deletada com sucesso");
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.log(err);
     }
   };
 
   return (
     <TechContext.Provider
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         getTech,
         techSelected,

@@ -1,6 +1,6 @@
 import React from "react";
-import RoutesMain from "./routes";
 import { ToastContainer } from "react-toastify";
+import RoutesMain from "./routes";
 import TechProvider from "./Contexts/TechContext";
 import "react-toastify/dist/ReactToastify.min.css";
 import "./styles/App.css";

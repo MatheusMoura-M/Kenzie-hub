@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { HiEyeOff, HiEye } from "react-icons/hi";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { motion } from "framer-motion";
-import { ButtonPrimary, ButtonSecondary } from "../../styles/buttons";
+import { ButtonPrimary } from "../../styles/buttons";
 import { Container } from "../../styles/global";
 import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
 import { Box } from "../Register/styled";
@@ -19,7 +19,6 @@ const Login = () => {
   const [isShowPass, setIsShowPass] = useState(false);
 
   const { loginRequest } = useContext(AuthContext);
-  const navigate = useNavigate();
 
   const {
     register,

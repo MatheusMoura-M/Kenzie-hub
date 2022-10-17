@@ -5,6 +5,7 @@ import Api from "../services/api";
 
 export const AuthContext = createContext({});
 
+// eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [techs, setTechs] = useState(null);
@@ -17,6 +18,7 @@ const AuthProvider = ({ children }) => {
       toast.success("Usuário cadastrado");
       navigate("/");
     } catch (err) {
+      // eslint-disable-next-line no-unused-expressions
       err.response.data.message[0].includes("password")
         ? toast.error("Senha precisa de no mínimo 6 caracters")
         : toast.error("Email já existe");
@@ -50,6 +52,7 @@ const AuthProvider = ({ children }) => {
           setUser(data);
           setTechs(data.techs);
         } catch (err) {
+          // eslint-disable-next-line no-console
           console.log(err);
         }
       }
@@ -60,6 +63,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         user,
         setUser,
