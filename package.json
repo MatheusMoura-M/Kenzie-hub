@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.8",
-    "@types/jest": "^29.1.2",
-    "@types/node": "^18.11.0",
+    "@types/jest": "^29.2.0",
+    "@types/node": "^18.11.2",
     "axios": "^1.0.0",
     "framer-motion": "^7.5.3",
     "react": "^18.2.0",
@@ -28,6 +28,7 @@
   "devDependencies": {
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "@types/styled-components": "^5.1.26",
     "@vitejs/plugin-react": "^2.1.0",
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-airbnb": "^19.0.4",

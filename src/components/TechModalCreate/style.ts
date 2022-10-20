@@ -68,17 +68,31 @@ export const Modal = styled.div`
       justify-content: center;
       gap: 7px;
 
-      input {
-        background-color: var(--grey-3);
-        color: var(--grey-5);
-        border-radius: 0.2rem;
+        input {
+          background-color: var(--grey-3);
+          color: var(--grey-5);
+          border-radius: 0.2rem;
 
-        font-size: 14px;
+          font-size: 14px;
 
-        padding: 10px;
+          padding: 10px;
 
-        height: 30px;
-      }
+          height: 30px;
+        }
+        .msg_error {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 2px;
+
+          color: var(--message-error);
+          font-size: 13px;
+          margin: 3px 0 0 6px;
+
+            svg {
+              position: static;
+            }
+        }
     }
 
     & > div:nth-child(2) {

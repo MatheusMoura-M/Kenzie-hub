@@ -1,5 +1,4 @@
-import styled, { css, createGlobalStyle } from "styled-components";
-import { BaseTag } from "./components/BaseTag";
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
     *{
@@ -97,57 +96,4 @@ export const GlobalStyle = createGlobalStyle`
     a{
       text-decoration: none;
     }
-`;
-
-export const Container = styled(BaseTag)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin: 0 auto;
-  
-  ${({ size }) => {
-    switch (size) {
-      case "small":
-        return css`
-          max-width: 400px;
-          `;
-      case "default":
-        return css`
-          justify-content: flex-start;
-          max-height: 70%;
-          min-height: 470px;
-        `;
-      case "large":
-        return css`
-          min-height: 100vh;
-        `;
-      case "section":
-        return css`
-          min-height: 100vh;
-          gap: 12px;
-          margin: 10px; 
-          width: 95%;
-        `;
-      case "loading":
-        return css`
-          min-height: 100vh;
-        `;
-      default:
-        return false;
-    }
-  }}
-
-  @keyframes show {
-    0% {
-      opacity: 0;
-      transform: translateX(-25px);
-    }
-
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
 `;

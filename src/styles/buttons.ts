@@ -1,6 +1,11 @@
 import styled, { css } from "styled-components";
 
-export const ButtonPrimary = styled.button`
+export interface iSizeProps {
+  size?: string;
+  styleBox?: string;
+}
+
+export const ButtonPrimary = styled.button<iSizeProps>`
   border-radius: 0.35rem;
   background: var(--color-primary);
   border: 2px solid var(--color-primary-2);
@@ -50,7 +55,7 @@ export const ButtonPrimary = styled.button`
   }}
 `;
 
-export const ButtonSecondary = styled.button`
+export const ButtonSecondary = styled.button<iSizeProps>`
   border-radius: 0.35rem;
   background: var(--grey-4);
   border: 2px solid var(--grey-3);
@@ -106,7 +111,7 @@ export const ButtonSecondary = styled.button`
   }}
 `;
 
-export const ButtonNegative = styled.button`
+export const ButtonNegative = styled.button<iSizeProps>`
   border-radius: 0.5rem;
   background: var(--color-primary-dark);
   border: 2px solid var(--grey-3);

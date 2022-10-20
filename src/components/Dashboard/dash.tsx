@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { ButtonSecondary } from "../../styles/buttons";
-import { Container } from "../../styles/global";
+import { Container } from "../../styles/container";
 import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
 import Logo from "../../../public/assets/Logo.svg";
 import { AuthContext } from "../../Contexts/AuthContext";
@@ -15,7 +15,7 @@ import { TechModalUpdate } from "../TechModalUpdate";
 
 const Dash = () => {
   const navigate = useNavigate();
-  const { user, setUser, loading, techs } = useContext(AuthContext);
+  const { user, loading, techs } = useContext(AuthContext);
   const { isShowModalCreate, setIsShowModalCreate, isShowModalUpdate } =
     useContext(TechContext);
 
@@ -24,7 +24,6 @@ const Dash = () => {
   }
 
   const Logout = () => {
-    setUser();
     window.localStorage.clear();
     navigate("/");
   };

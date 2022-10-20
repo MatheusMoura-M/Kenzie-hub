@@ -1,6 +1,10 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-export const FormLogin = styled.form`
+interface iFormProps{
+  isShowPass: boolean;
+}
+
+export const FormLogin = styled.form<iFormProps>`
   display: flex;
   flex-direction: column;
   align-items: center;

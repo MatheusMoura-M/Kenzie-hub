@@ -1,6 +1,12 @@
-import React from "react";
+import { ReactNode } from "react";
 
-export const BaseTag = ({ tag, children, className }) => {
+interface iTagProps {
+  tag: string;
+  children: ReactNode;
+  className?: string;
+}
+
+export const BaseTag = ({ tag, children, className }: iTagProps) => {
   return (
     <>
       {tag === "h1"      && <h1      className={className}>{children}</h1>}

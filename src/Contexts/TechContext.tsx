@@ -1,23 +1,38 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from "react";
 import { toast } from "react-toastify";
 import Api from "../services/api";
-import { AuthContext } from "./AuthContext";
+import { AuthContext, iTechs } from "./AuthContext";
 
-export const TechContext = createContext({});
+interface iTechsProps{
+  children: ReactNode;
+}
+
+interface iTechsContext{
+  getTech: (tech: iTechs) => void;
+  techSelected: iTechs;
+  addTechs: (data: {}) => Promise<void>;
+  deleteTechs: (id: string) => Promise<void>;
+  isShowModalCreate: boolean;
+  setIsShowModalCreate: Dispatch<SetStateAction<boolean>>;
+  isShowModalUpdate: boolean;
+  setIsShowModalUpdate: Dispatch<SetStateAction<boolean>>;
+}
+
+export const TechContext = createContext({} as iTechsContext);
 
 // eslint-disable-next-line react/prop-types
-const TechProvider = ({ children }) => {
+const TechProvider = ({ children }: iTechsProps) => {
   const { techs, setTechs } = useContext(AuthContext);
-  const [isShowModalCreate, setIsShowModalCreate] = useState(false);
-  const [isShowModalUpdate, setIsShowModalUpdate] = useState(false);
-  const [techSelected, setTechSelected] = useState({});
+  const [isShowModalCreate, setIsShowModalCreate] = useState<boolean>(false);
+  const [isShowModalUpdate, setIsShowModalUpdate] = useState<boolean>(false);
+  const [techSelected, setTechSelected] = useState<iTechs>({} as iTechs);
 
-  const getTech = (tech) => {
+  const getTech = (tech: iTechs) => {
     setIsShowModalUpdate(true);
     setTechSelected(tech);
   };
 
-  const addTechs = async (data) => {
+  const addTechs = async (data: {}) => {
     try {
       const resp = await Api.post("users/techs", data);
       setIsShowModalCreate(false);
@@ -28,7 +43,7 @@ const TechProvider = ({ children }) => {
     }
   };
 
-  const deleteTechs = async (id) => {
+  const deleteTechs = async (id: string) => {
     const filtered = techs.filter((tech) => tech.id !== id);
 
     try {
@@ -47,8 +62,6 @@ const TechProvider = ({ children }) => {
       value={{
         getTech,
         techSelected,
-        techs,
-        setTechs,
         addTechs,
         deleteTechs,
         isShowModalCreate,

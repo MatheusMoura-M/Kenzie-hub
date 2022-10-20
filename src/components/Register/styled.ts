@@ -1,4 +1,5 @@
 import styled, {css} from "styled-components"
+import { iSizeProps } from "../../styles/buttons";
 
 export const FormRegister = styled.form`
   display:flex; 
@@ -145,14 +146,14 @@ export const FormRegister = styled.form`
   }
 `
 
-export const Box = styled.div`
+export const Box = styled.div<iSizeProps>`
   display:flex; 
   flex-direction: column;
   align-items: center; 
   justify-content: center;
   
-  ${({classs}) => {
-    switch (classs) {
+  ${({styleBox}) => {
+    switch (styleBox) {
       case "boxLogo":
         return css`
             flex-direction: row;
@@ -171,10 +172,6 @@ export const Box = styled.div`
         return css`
           gap: 10px;
         `;
-      // case "large":
-      //   return css`
-          
-      //   `;
       default:
         return false;
     }

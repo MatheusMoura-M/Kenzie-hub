@@ -1,39 +1,89 @@
-import { createContext, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Api from "../services/api";
+import { loginUser } from "../services/loginUserResponse";
 
-export const AuthContext = createContext({});
+interface iAuthProps {
+  children: ReactNode;
+}
+
+export interface iFormLogin {
+  email: string;
+  password: string;
+}
+
+interface iAuth{
+  user: iUser;
+  techs: iTechs[];
+  setUser: Dispatch<SetStateAction<iUser>>;
+  loading: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  registerRequest: (data: {}) => Promise<void>
+  loginRequest: (data: iFormLogin) => Promise<void>
+  setTechs: Dispatch<SetStateAction<iTechs[]>>;
+}
+
+export interface iTechs {
+  id: string;
+  status: string;
+  title: string;
+}
+
+export interface iUser {
+  bio: string;
+  contact: string;
+  course_module: string;
+  created_at: string;
+  email: string;
+  id: string;
+  name: string;
+  techs: iTechs[];
+}
+
+export const AuthContext = createContext({} as iAuth);
 
 // eslint-disable-next-line react/prop-types
-const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [techs, setTechs] = useState(null);
+const AuthProvider = ({ children }: iAuthProps) => {
+  const [user, setUser] = useState<iUser>({} as iUser);
+  const [techs, setTechs] = useState<iTechs[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const registerRequest = async (data) => {
+  const registerRequest = async (data: {}) => {
     try {
       await Api.post("users", data);
       toast.success("Usuário cadastrado");
       navigate("/");
-    } catch (err) {
+    } catch (error: any) {
       // eslint-disable-next-line no-unused-expressions
-      err.response.data.message[0].includes("password")
+      error.response.data.message[0].includes("password")
         ? toast.error("Senha precisa de no mínimo 6 caracters")
         : toast.error("Email já existe");
     }
   };
 
-  const loginRequest = async (data) => {
+  const loginRequest = async (data: iFormLogin) => {
     setLoading(true);
     try {
-      const resp = await Api.post("sessions", data);
+      const resp = await loginUser(data)
 
-      window.localStorage.setItem("@Token", resp.data.token);
-      window.localStorage.setItem("@UserId", resp.data.user.id);
-      setUser(resp.data.user);
-      setTechs(resp.data.user.techs)
+      const token = localStorage.getItem("@Token");
+      Api.defaults.headers.authorization = `Bearer ${token}`;
+      
+      window.localStorage.setItem("@Token", resp.token);
+      window.localStorage.setItem("@UserId", resp.user.id);
+      
+      setUser(resp.user);
+      setTechs(resp.user.techs);
+
       navigate("/dashboard");
     } catch (error) {
       toast.error("Combinação de email/senha incorreta");
@@ -43,17 +93,19 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("@Token");
-
     async function loadUser() {
+      const token = localStorage.getItem("@Token");
+
       if (token) {
         try {
+          Api.defaults.headers.authorization = `Bearer ${token}`;
+
           const { data } = await Api.get("profile");
           setUser(data);
           setTechs(data.techs);
-        } catch (err) {
+        } catch (error) {
           // eslint-disable-next-line no-console
-          console.log(err);
+          console.error(error);
         }
       }
       setLoading(false);

@@ -1,4 +1,3 @@
-import React from "react";
 import { ToastContainer } from "react-toastify";
 import RoutesMain from "./routes";
 import TechProvider from "./Contexts/TechContext";
