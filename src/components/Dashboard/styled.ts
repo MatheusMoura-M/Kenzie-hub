@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const Nav = styled.nav`
   display: flex;
@@ -71,7 +71,15 @@ export const UlMain = styled.ul`
   justify-content: flex-start;
   gap: 20px;
 
-  background: var(--grey-2);
+  background: #000000;
+  background: linear-gradient(to right, #4a1712, #320d0d, #1c0909 40%, #000000);
+  background: -webkit-linear-gradient(
+    to right,
+    #4a1712,
+    #320d0d,
+    #1c0909 40%,
+    #000000
+  );
   border-radius: 0.15rem;
 
   padding: 15px;

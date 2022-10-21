@@ -15,7 +15,7 @@ import { TechModalUpdate } from "../TechModalUpdate";
 
 const Dash = () => {
   const navigate = useNavigate();
-  const { user, loading, techs } = useContext(AuthContext);
+  const { user, setUser, loading, techs } = useContext(AuthContext);
   const { isShowModalCreate, setIsShowModalCreate, isShowModalUpdate } =
     useContext(TechContext);
 
@@ -24,11 +24,13 @@ const Dash = () => {
   }
 
   const Logout = () => {
+    setUser(null)
     window.localStorage.clear();
     navigate("/");
   };
+  const token = localStorage.getItem("@Token");
 
-  return user ? (
+  return token ? (
     <>
       <motion.div
         initial={{ width: "100%", height: "100vh" }}
@@ -46,8 +48,8 @@ const Dash = () => {
         </Nav>
         <Header>
           <div className="boxHeaderMain">
-            <ThemeTitle size="medium">{`Olá, ${user.name}`}</ThemeTitle>
-            <ThemeParagraph>{user.course_module}</ThemeParagraph>
+            <ThemeTitle size="medium">{`Olá, ${user?.name}`}</ThemeTitle>
+            <ThemeParagraph>{user?.course_module}</ThemeParagraph>
           </div>
         </Header>
         <Container tag="main" size="default">

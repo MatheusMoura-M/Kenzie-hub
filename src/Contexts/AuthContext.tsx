@@ -21,14 +21,15 @@ export interface iFormLogin {
 }
 
 interface iAuth{
-  user: iUser;
+  user: iUser | null;
+  setUser: Dispatch<SetStateAction<iUser | null>>;
   techs: iTechs[];
-  setUser: Dispatch<SetStateAction<iUser>>;
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
   registerRequest: (data: {}) => Promise<void>
   loginRequest: (data: iFormLogin) => Promise<void>
   setTechs: Dispatch<SetStateAction<iTechs[]>>;
+  loadUser(): Promise<void>;
 }
 
 export interface iTechs {
@@ -52,10 +53,11 @@ export const AuthContext = createContext({} as iAuth);
 
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }: iAuthProps) => {
-  const [user, setUser] = useState<iUser>({} as iUser);
+  const [user, setUser] = useState<iUser | null>({} as iUser);
   const [techs, setTechs] = useState<iTechs[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  // console.log(user)
 
   const registerRequest = async (data: {}) => {
     try {
@@ -92,26 +94,27 @@ const AuthProvider = ({ children }: iAuthProps) => {
     }
   };
 
-  useEffect(() => {
-    async function loadUser() {
-      const token = localStorage.getItem("@Token");
+  async function loadUser() {
+    const token = localStorage.getItem("@Token");
 
-      if (token) {
-        try {
-          Api.defaults.headers.authorization = `Bearer ${token}`;
+    if (token) {
+      try {
+        Api.defaults.headers.authorization = `Bearer ${token}`;
+        const { data } = await Api.get("profile");
 
-          const { data } = await Api.get("profile");
-          setUser(data);
-          setTechs(data.techs);
-        } catch (error) {
-          // eslint-disable-next-line no-console
-          console.error(error);
-        }
+        setUser(data);
+        setTechs(data.techs);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
       }
-      setLoading(false);
     }
+    setLoading(false);
+  }
+  
+  useEffect(() => {
     loadUser();
-  }, [techs]);
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -125,6 +128,7 @@ const AuthProvider = ({ children }: iAuthProps) => {
         loginRequest,
         techs,
         setTechs,
+        loadUser,
       }}
     >
       {children}

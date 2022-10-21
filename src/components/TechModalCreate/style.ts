@@ -27,7 +27,7 @@ export const Modal = styled.div`
 
     position: relative;
 
-    background: var(--grey-2);
+    background: #2c0909;
 
     border-radius: 0.2rem;
   }
@@ -41,7 +41,7 @@ export const Modal = styled.div`
 
     padding: 10px 20px;
 
-    background: var(--grey-3);
+    background: #912a2a;
     border-radius: 0.2rem 0.2rem 0 0;
 
     button {
@@ -50,6 +50,16 @@ export const Modal = styled.div`
       right: 10px;
 
       color: var(--grey-4);
+
+      opacity: 0.8;
+
+      transition: 0.3s;
+
+      &:hover {
+        transition: 0.3s;
+        opacity: 1;
+        color: var(--black);
+      }
     }
   }
 
@@ -68,31 +78,44 @@ export const Modal = styled.div`
       justify-content: center;
       gap: 7px;
 
-        input {
-          background-color: var(--grey-3);
-          color: var(--grey-5);
-          border-radius: 0.2rem;
+      input {
+        background: #912a2a;
+        color: var(--grey-5);
+        border-radius: 0.2rem;
 
-          font-size: 14px;
+        font-size: 14px;
 
-          padding: 10px;
+        padding: 10px;
 
-          height: 30px;
+        height: 30px;
+
+        transition: 0.3s;
+
+        &::placeholder{
+          color: var(--grey-4);
         }
-        .msg_error {
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          gap: 2px;
 
-          color: var(--message-error);
-          font-size: 13px;
-          margin: 3px 0 0 6px;
-
-            svg {
-              position: static;
-            }
+        &:hover {
+          transition: 0.3s;
+          filter: brightness(1.2);
+          border: 1px solid var(--grey-4);
         }
+      }
+
+      .msg_error {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 2px;
+
+        color: var(--message-error);
+        font-size: 13px;
+        margin: 3px 0 0 6px;
+
+        svg {
+          position: static;
+        }
+      }
     }
 
     & > div:nth-child(2) {
@@ -103,11 +126,21 @@ export const Modal = styled.div`
       margin-bottom: 10px;
 
       select {
-        background-color: var(--grey-3);
-        color: var(--grey-5);
+        background: #912a2a;
+        color: var(--grey-4);
         border-radius: 0.2rem;
 
+        padding-left: 5px;
+
         height: 30px;
+        
+        transition: 0.3s;
+
+        &:hover {
+          transition: 0.3s;
+          filter: brightness(1.2);
+          border: 1px solid var(--grey-4);
+        }
       }
     }
   }

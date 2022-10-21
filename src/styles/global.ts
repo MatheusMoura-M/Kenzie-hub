@@ -33,10 +33,10 @@ export const GlobalStyle = createGlobalStyle`
       --color-primary-dark: #59323F;
       --message-error: #e12525;
       --black: #000000;
-      --grey-1: #121214;
+      --grey-1: #851d26;
       --grey-2: #212529;
       --grey-3: #343B41;
-      --grey-4: #868E96;
+      --grey-4: #ffd3d3;
       --grey-5: #F8F9FA;
       --opaco: rgb(0 0 0 / 93%);
       --opaco-2: rgb(0 0 0 / 80%);
@@ -74,7 +74,10 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body{
-      background: var(--opaco);
+      background: #000000;
+      background: linear-gradient(to right, #000000 40%, #1c0909, #320d0d, #4a1712  );
+      background: -webkit-linear-gradient(to right, #000000 40%, #1c0909, #320d0d, #4a1712  );  
+
       min-width: 100%;
     }
 

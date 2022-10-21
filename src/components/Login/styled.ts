@@ -16,7 +16,7 @@ export const FormLogin = styled.form<iFormProps>`
 
   padding: 1rem 0;
 
-  background: var(--grey-2);
+  background: #1e1a1a;
   border-radius: 0.5rem;
 
   .boxLabel {
@@ -49,15 +49,15 @@ export const FormLogin = styled.form<iFormProps>`
       right: 5px;
       top: 17px;
       cursor: pointer;
-      color: var(--grey-5);
+      color: var(--grey-4);
     }
 
     input {
       border: 0;
       border-radius: 0.3rem;
-      border-bottom: 2px solid lightgrey;
+      border-bottom: 2px solid var(--grey-4);
       outline: none;
-      color: var(--grey-5);
+      color: var(--grey-4);
 
       padding: 10px;
       margin-top: 5px;
@@ -125,7 +125,7 @@ export const FormLogin = styled.form<iFormProps>`
     a {
       border-radius: 0.35rem;
       background: var(--grey-4);
-      border: 2px solid var(--grey-3);
+      border: 0.5px solid var(--grey-1);
       color: var(--grey-1);
 
       display: flex;
@@ -145,10 +145,10 @@ export const FormLogin = styled.form<iFormProps>`
 
       :hover {
         opacity: 1;
-        background: var(--grey-3);
-        filter: brightness(1.6);
-        border: 1px solid var(--grey-4);
-        color: var(--grey-4);
+        background: var(--grey-4);
+        filter: brightness(.7);
+        border: 1px solid var(--grey-1);
+        color: var(--grey-1);
       }
     }
   }

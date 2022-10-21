@@ -6,7 +6,7 @@ export const ThemeTitle = styled.h2<iSizeProps>`
   font-weight: var(--fontWei-title);
   line-height: var(--lineHei-title);
   font-size: var(--fontSize-title);
-  color: var(--grey-5);
+  color: var(--grey-4);
   
   ${({ size }) => {
     switch (size) {
@@ -46,7 +46,7 @@ export const ThemeParagraph = styled.p<iSizeProps>`
           `;
       case "titleCard":
         return css`
-          color: var(--grey-5);
+          color: var(--grey-4);
         `;
       default:
         return false;

@@ -37,7 +37,7 @@ export const TechModalCreate = () => {
             <div>
               <>
                 <ThemeParagraph>Nome da tecnologia</ThemeParagraph>
-                <input type="text" {...register("title")} />
+                <input type="text" placeholder="Digite a tecnologia" {...register("title")} />
                 <p className="msg_error">
                   {errors.title && <RiErrorWarningFill />}
                   {errors.title?.message}
