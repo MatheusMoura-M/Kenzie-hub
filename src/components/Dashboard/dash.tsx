@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { ButtonSecondary } from "../../styles/buttons";
 import { Container } from "../../styles/container";
@@ -24,7 +24,7 @@ const Dash = () => {
   }
 
   const Logout = () => {
-    setUser(null)
+    setUser(null);
     window.localStorage.clear();
     navigate("/");
   };
@@ -63,12 +63,20 @@ const Dash = () => {
             </ButtonSecondary>
             {isShowModalCreate && <TechModalCreate />}
           </BoxHeaderMain>
-          <UlMain>
-            {isShowModalUpdate && <TechModalUpdate />}
-            {techs.map((tech) => (
-              <Tech key={tech.id} tech={tech} />
-            ))}
-          </UlMain>
+          {techs.length !== 0 ? (
+            <UlMain>
+              {isShowModalUpdate && <TechModalUpdate />}
+              {techs.map((tech) => (
+                <Tech key={tech.title} tech={tech} />
+              ))}
+            </UlMain>
+          ) : (
+            <UlMain size="vazia">
+              <ThemeParagraph size="titleCard">
+                Ainda não há tecnologias adicionadas
+              </ThemeParagraph>
+            </UlMain>
+          )}
         </Container>
       </motion.div>
     </>

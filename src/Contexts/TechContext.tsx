@@ -10,7 +10,7 @@ interface iTechsProps{
 interface iTechsContext{
   getTech: (tech: iTechs) => void;
   techSelected: iTechs;
-  addTechs: (data: {}) => Promise<void>;
+  addTechs: (data: iTechs) => Promise<void>;
   deleteTechs: (id: string) => Promise<void>;
   isShowModalCreate: boolean;
   setIsShowModalCreate: Dispatch<SetStateAction<boolean>>;
@@ -32,12 +32,11 @@ const TechProvider = ({ children }: iTechsProps) => {
     setTechSelected(tech);
   };
 
-  const addTechs = async (data: {}) => {
+  const addTechs = async (data: iTechs) => {
     try {
       const resp = await Api.post("users/techs", data);
       setIsShowModalCreate(false);
-      // setTechs([...techs, resp.data]);
-      loadUser()
+      loadUser()  
 
       toast.success("Tecnologia cadastrada com sucesso");
     } catch (err) {

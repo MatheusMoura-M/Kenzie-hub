@@ -33,7 +33,7 @@ interface iAuth{
 }
 
 export interface iTechs {
-  id: string;
+  id?: string;
   status: string;
   title: string;
 }
@@ -57,7 +57,6 @@ const AuthProvider = ({ children }: iAuthProps) => {
   const [techs, setTechs] = useState<iTechs[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  // console.log(user)
 
   const registerRequest = async (data: {}) => {
     try {
@@ -87,6 +86,8 @@ const AuthProvider = ({ children }: iAuthProps) => {
       setTechs(resp.user.techs);
 
       navigate("/dashboard");
+
+      location.reload()
     } catch (error) {
       toast.error("Combinação de email/senha incorreta");
     } finally {
@@ -94,14 +95,16 @@ const AuthProvider = ({ children }: iAuthProps) => {
     }
   };
 
+  
   async function loadUser() {
-    const token = localStorage.getItem("@Token");
 
+    const token = localStorage.getItem("@Token");
+    
     if (token) {
       try {
         Api.defaults.headers.authorization = `Bearer ${token}`;
         const { data } = await Api.get("profile");
-
+        
         setUser(data);
         setTechs(data.techs);
       } catch (error) {
@@ -109,11 +112,10 @@ const AuthProvider = ({ children }: iAuthProps) => {
         console.error(error);
       }
     }
-    setLoading(false);
+    setLoading(false)
   }
-  
   useEffect(() => {
-    loadUser();
+    loadUser()
   }, []);
 
   return (

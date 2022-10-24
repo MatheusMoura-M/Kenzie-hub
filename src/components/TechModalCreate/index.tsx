@@ -8,6 +8,7 @@ import { RiErrorWarningFill } from "react-icons/ri";
 import { TechContext } from "../../Contexts/TechContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import SchemaCreateTechs from "../../validations/createTech";
+import { iTechs } from "../../Contexts/AuthContext";
 
 export interface iUseFormTech {
   title: string;
@@ -21,7 +22,7 @@ export const TechModalCreate = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<iUseFormTech>({ resolver: yupResolver(SchemaCreateTechs) });
+  } = useForm<iTechs>({ resolver: yupResolver(SchemaCreateTechs) });
 
   return (
     <Modal>
