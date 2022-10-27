@@ -113,7 +113,7 @@ const AuthProvider = ({ children }: iAuthProps) => {
       setTechs(resp.user.techs);
 
       navigate("/dashboard");
-      // location.reload()
+      location.reload()
     } catch (error) {
       toast.error("Combinação de email/senha incorreta");
     } finally {
