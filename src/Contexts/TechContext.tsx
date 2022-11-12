@@ -10,7 +10,7 @@ interface iTechsProps{
 interface iTechsContext{
   getTech: (tech: iTechs) => void;
   techSelected: iTechs;
-  addTechs: (data: {}) => Promise<void>;
+  addTechs: (data: iTechs) => Promise<void>;
   deleteTechs: (id: string) => Promise<void>;
   isShowModalCreate: boolean;
   setIsShowModalCreate: Dispatch<SetStateAction<boolean>>;
@@ -22,7 +22,7 @@ export const TechContext = createContext({} as iTechsContext);
 
 // eslint-disable-next-line react/prop-types
 const TechProvider = ({ children }: iTechsProps) => {
-  const { techs, setTechs } = useContext(AuthContext);
+  const { techs, setTechs, loadUser } = useContext(AuthContext);
   const [isShowModalCreate, setIsShowModalCreate] = useState<boolean>(false);
   const [isShowModalUpdate, setIsShowModalUpdate] = useState<boolean>(false);
   const [techSelected, setTechSelected] = useState<iTechs>({} as iTechs);
@@ -32,11 +32,12 @@ const TechProvider = ({ children }: iTechsProps) => {
     setTechSelected(tech);
   };
 
-  const addTechs = async (data: {}) => {
+  const addTechs = async (data: iTechs) => {
     try {
       const resp = await Api.post("users/techs", data);
       setIsShowModalCreate(false);
-      setTechs([...techs, resp.data]);
+      loadUser()  
+
       toast.success("Tecnologia cadastrada com sucesso");
     } catch (err) {
       toast.error("Essa tecnologia já está cadastrada");
@@ -49,6 +50,8 @@ const TechProvider = ({ children }: iTechsProps) => {
     try {
       await Api.delete(`users/techs/${id}`);
       setTechs(filtered);
+      loadUser()
+
       toast.success("Tecnologia deletada com sucesso");
     } catch (err) {
       // eslint-disable-next-line no-console

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { ButtonSecondary } from "../../styles/buttons";
 import { Container } from "../../styles/container";
@@ -15,7 +15,7 @@ import { TechModalUpdate } from "../TechModalUpdate";
 
 const Dash = () => {
   const navigate = useNavigate();
-  const { user, loading, techs } = useContext(AuthContext);
+  const { user, setUser, loading, techs } = useContext(AuthContext);
   const { isShowModalCreate, setIsShowModalCreate, isShowModalUpdate } =
     useContext(TechContext);
 
@@ -24,11 +24,13 @@ const Dash = () => {
   }
 
   const Logout = () => {
+    setUser(null);
     window.localStorage.clear();
     navigate("/");
   };
+  const token = localStorage.getItem("@Token");
 
-  return user ? (
+  return token ? (
     <>
       <motion.div
         initial={{ width: "100%", height: "100vh" }}
@@ -46,8 +48,8 @@ const Dash = () => {
         </Nav>
         <Header>
           <div className="boxHeaderMain">
-            <ThemeTitle size="medium">{`Olá, ${user.name}`}</ThemeTitle>
-            <ThemeParagraph>{user.course_module}</ThemeParagraph>
+            <ThemeTitle size="medium">{`Olá, ${user?.name}`}</ThemeTitle>
+            <ThemeParagraph>{user?.course_module}</ThemeParagraph>
           </div>
         </Header>
         <Container tag="main" size="default">
@@ -61,12 +63,20 @@ const Dash = () => {
             </ButtonSecondary>
             {isShowModalCreate && <TechModalCreate />}
           </BoxHeaderMain>
-          <UlMain>
-            {isShowModalUpdate && <TechModalUpdate />}
-            {techs.map((tech) => (
-              <Tech key={tech.id} tech={tech} />
-            ))}
-          </UlMain>
+          {techs.length !== 0 ? (
+            <UlMain>
+              {isShowModalUpdate && <TechModalUpdate />}
+              {techs.map((tech) => (
+                <Tech key={tech.title} tech={tech} />
+              ))}
+            </UlMain>
+          ) : (
+            <UlMain size="vazia">
+              <ThemeParagraph size="titleCard">
+                Ainda não há tecnologias adicionadas
+              </ThemeParagraph>
+            </UlMain>
+          )}
         </Container>
       </motion.div>
     </>
