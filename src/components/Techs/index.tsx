@@ -1,13 +1,17 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { ThemeParagraph } from "../../styles/typography";
 import { Card } from "./style";
 import { IoMdTrash } from "react-icons/io";
 import { MdMenuOpen } from "react-icons/md";
 import { TechContext } from "../../Contexts/TechContext";
+import { iTechs } from "../../Contexts/AuthContext";
 
-export const Tech = ({ tech }) => {
+interface iTechCard {
+  tech: iTechs;
+}
+
+export const Tech = ({ tech }: iTechCard) => {
   const { deleteTechs, getTech } = useContext(TechContext);
-
   return (
     <Card>
       <ThemeParagraph size="titleCard">{tech.title}</ThemeParagraph>

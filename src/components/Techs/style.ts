@@ -15,6 +15,16 @@ export const Card = styled.li`
   width: 100%;
   height: 35px;
 
+  transition: 0.3s;
+  
+  &:hover {
+    background: var(--grey-1);
+    filter: brightness(1.4);
+    border: 0.1px solid var(--grey-4);
+    color: var(--grey-4);
+    transition: 0.3s;
+  }
+
   & > div {
     display: flex;
     align-items: flex-start;
@@ -28,14 +38,18 @@ export const Card = styled.li`
 
       color: var(--grey-5);
 
-      opacity: 0.5;
-      transition: 0.3s;
-
+      opacity: .8;
+      transition: 0.4s;
+      
+      color: black;
+      
       &:hover {
+        transition: 0.4s;
+        transform: translateX(-1px) translateY(-1px);
         opacity: 1;
       }
     }
-
+    
     .btn-1 {
       svg {
         right: 30px;

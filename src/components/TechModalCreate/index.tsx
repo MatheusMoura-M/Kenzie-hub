@@ -1,12 +1,19 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { ButtonPrimary } from "../../styles/buttons";
 import { MdClose } from "react-icons/md";
 import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
 import { Modal } from "./style";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { SchemaTech } from "../../validations/tech";
+import { RiErrorWarningFill } from "react-icons/ri";
 import { TechContext } from "../../Contexts/TechContext";
+import { yupResolver } from "@hookform/resolvers/yup";
+import SchemaCreateTechs from "../../validations/createTech";
+import { iTechs } from "../../Contexts/AuthContext";
+
+export interface iUseFormTech {
+  title: string;
+  status: string;
+}
 
 export const TechModalCreate = () => {
   const { setIsShowModalCreate, addTechs } = useContext(TechContext);
@@ -15,9 +22,7 @@ export const TechModalCreate = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(SchemaTech),
-  });
+  } = useForm<iTechs>({ resolver: yupResolver(SchemaCreateTechs) });
 
   return (
     <Modal>
@@ -31,14 +36,18 @@ export const TechModalCreate = () => {
           </div>
           <form onSubmit={handleSubmit(addTechs)} className="boxContent">
             <div>
-              <ThemeParagraph>Nome da tecnologia</ThemeParagraph>
-              <input type="text" {...register("title")} />
-              {errors.name?.message}
+              <>
+                <ThemeParagraph>Nome da tecnologia</ThemeParagraph>
+                <input type="text" placeholder="Digite a tecnologia" {...register("title")} />
+                <p className="msg_error">
+                  {errors.title && <RiErrorWarningFill />}
+                  {errors.title?.message}
+                </p>
+              </>
             </div>
             <div>
               <ThemeParagraph>Selecionar status</ThemeParagraph>
               <select {...register("status")}>
-                {/* <option value=""></option> */}
                 <option value="Iniciante">Iniciante</option>
                 <option value="Intermediário">Intermediário</option>
                 <option value="Avançado">Avançado</option>

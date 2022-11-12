@@ -5,24 +5,34 @@ import { Link } from "react-router-dom";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { motion } from "framer-motion";
-import { Container } from "../../styles/global";
 import { FormRegister, Box } from "./styled";
 import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
 import SchemaRegister from "../../validations/registerUser";
 import Logo from "../../../public/assets/Logo.svg";
 import { ButtonNegative } from "../../styles/buttons";
 import { AuthContext } from "../../Contexts/AuthContext";
+import { Container } from "../../styles/container";
+
+interface iUseFormProps {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  bio: string;
+  contact: string;
+  course_module: string;
+}
 
 const Register = () => {
-  const [isShowPass, setIsShowPass] = useState(false);
-  const [isShowConfirmPass, setIsShowConfirmPass] = useState(false);
+  const [isShowPass, setIsShowPass] = useState<boolean>(false);
+  const [isShowConfirmPass, setIsShowConfirmPass] = useState<boolean>(false);
   const { registerRequest } = useContext(AuthContext);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<iUseFormProps>({
     resolver: yupResolver(SchemaRegister),
   });
 
@@ -31,16 +41,16 @@ const Register = () => {
       <motion.div
         animate={{ opacity: [0, 1], x: [-5, 0], y: [-5, 0] }}
         exit={{ opacity: 0, x: -5, y: -5 }}
-        transition={{ease: "easeInOut", duration: .5 }}
+        transition={{ ease: "easeInOut", duration: 0.5 }}
       >
         <Container tag="section" size="section">
-          <Box classs="boxLogo">
+          <Box styleBox="boxLogo">
             <img src={Logo} alt="Logo" />
             <Link to="/">Voltar</Link>
           </Box>
 
           <FormRegister onSubmit={handleSubmit(registerRequest)}>
-            <Box classs="boxForm">
+            <Box styleBox="boxForm">
               <ThemeTitle>Crie sua conta</ThemeTitle>
               <ThemeParagraph>Rápido e grátis, vamos nessa!!</ThemeParagraph>
             </Box>
@@ -53,8 +63,10 @@ const Register = () => {
               />
               <label htmlFor="name">Nome</label>
               <p>
-                {errors.name && <RiErrorWarningFill />}
-                {errors.name?.message}
+                <>
+                  {errors.name && <RiErrorWarningFill />}
+                  {errors.name?.message}
+                </>
               </p>
             </div>
 
@@ -66,8 +78,10 @@ const Register = () => {
               />
               <label htmlFor="email">Email</label>
               <p>
-                {errors.email && <RiErrorWarningFill />}
-                {errors.email?.message}
+                <>
+                  {errors.email && <RiErrorWarningFill />}
+                  {errors.email?.message}
+                </>
               </p>
             </div>
 
@@ -80,8 +94,10 @@ const Register = () => {
               />
               <label htmlFor="password">Senha</label>
               <p>
-                {errors.password && <RiErrorWarningFill />}
-                {errors.password?.message}
+                <>
+                  {errors.password && <RiErrorWarningFill />}
+                  {errors.password?.message}
+                </>
               </p>
               {isShowPass ? (
                 <HiEye onClick={() => setIsShowPass(!isShowPass)} />
@@ -99,8 +115,10 @@ const Register = () => {
               />
               <label htmlFor="confirmPassword">Confirmar Senha</label>
               <p>
-                {errors.confirmPassword && <RiErrorWarningFill />}
-                {errors.confirmPassword?.message}
+                <>
+                  {errors.confirmPassword && <RiErrorWarningFill />}
+                  {errors.confirmPassword?.message}
+                </>
               </p>
               {isShowConfirmPass ? (
                 <HiEye
@@ -121,8 +139,10 @@ const Register = () => {
               />
               <label htmlFor="bio">Bio</label>
               <p>
-                {errors.bio && <RiErrorWarningFill />}
-                {errors.bio?.message}
+                <>
+                  {errors.bio && <RiErrorWarningFill />}
+                  {errors.bio?.message}
+                </>
               </p>
             </div>
 
@@ -134,15 +154,16 @@ const Register = () => {
               />
               <label htmlFor="contact">Contato</label>
               <p>
-                {errors.contact && <RiErrorWarningFill />}
-                {errors.contact?.message}
+                <>
+                  {errors.contact && <RiErrorWarningFill />}
+                  {errors.contact?.message}
+                </>
               </p>
             </div>
 
             <div className="boxSelect">
               <label>Selecionar Módulo</label>
               <select {...register("course_module")}>
-                {/* <option value=""></option> */}
                 <option value="Primeiro módulo (Introdução ao Frontend)">
                   Primeiro módulo (Introdução ao Frontend)
                 </option>

@@ -1,11 +1,12 @@
 import styled, { css } from "styled-components";
+import { iSizeProps } from "./buttons";
 
-export const ThemeTitle = styled.h2`
+export const ThemeTitle = styled.h2<iSizeProps>`
   font-family: var(--font-family);
   font-weight: var(--fontWei-title);
   line-height: var(--lineHei-title);
   font-size: var(--fontSize-title);
-  color: var(--grey-5);
+  color: var(--grey-4);
   
   ${({ size }) => {
     switch (size) {
@@ -30,7 +31,7 @@ export const ThemeTitle = styled.h2`
   }}
 `;
 
-export const ThemeParagraph = styled.p`
+export const ThemeParagraph = styled.p<iSizeProps>`
   font-family: var(--font-family);
   font-size: var(--fontSize-headline);
   font-weight: var(--fontWei-headline);
@@ -45,7 +46,7 @@ export const ThemeParagraph = styled.p`
           `;
       case "titleCard":
         return css`
-          color: var(--grey-5);
+          color: var(--grey-4);
         `;
       default:
         return false;
@@ -53,7 +54,7 @@ export const ThemeParagraph = styled.p`
   }}
 `;
 
-export const ThemeSpan = styled.span`
+export const ThemeSpan = styled.span<iSizeProps>`
   font-family: var(--font-family);
   line-height: var(--lineHei-headlineBold);
   font-weight: var(--fontWei-headlineBold);

@@ -1,31 +1,34 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useContext, useState } from "react";
+import { Dispatch, useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { HiEyeOff, HiEye } from "react-icons/hi";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { motion } from "framer-motion";
-import { ButtonPrimary, ButtonSecondary } from "../../styles/buttons";
-import { Container } from "../../styles/global";
 import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
-import { Box } from "../Register/styled";
-import { FormLogin } from "./styled";
 import SchemaLogin from "../../validations/loginUser";
-
-import Logo from "../../../public/assets/Logo.svg";
 import { AuthContext } from "../../Contexts/AuthContext";
+import { ButtonPrimary } from "../../styles/buttons";
+import { Box } from "../Register/styled";
+import { Container } from "../../styles/container";
+import Logo from "../../../public/assets/Logo.svg";
+import { FormLogin } from "./styled";
+
+interface iForm {
+  email: string;
+  password: string;
+}
 
 const Login = () => {
-  const [isShowPass, setIsShowPass] = useState(false);
+  const [isShowPass, setIsShowPass] = useState<boolean>(false);
 
   const { loginRequest } = useContext(AuthContext);
-  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<iForm>({
     resolver: yupResolver(SchemaLogin),
   });
 
@@ -36,7 +39,7 @@ const Login = () => {
         exit={{ opacity: 0, x: -10 }}
         transition={{ ease: "easeInOut", duration: 1 }}
       >
-        <Box classs="boxLogoLogin">
+        <Box styleBox="boxLogoLogin">
           <img src={Logo} alt="Logo" />
         </Box>
       </motion.div>
@@ -47,7 +50,6 @@ const Login = () => {
       >
         <FormLogin
           isShowPass={isShowPass}
-          classs="formLogin"
           onSubmit={handleSubmit(loginRequest)}
         >
           <ThemeTitle>Login</ThemeTitle>

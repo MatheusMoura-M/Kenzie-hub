@@ -1,10 +1,15 @@
 import styled, { css } from "styled-components";
 
-export const ButtonPrimary = styled.button`
+export interface iSizeProps {
+  size?: string;
+  styleBox?: string;
+}
+
+export const ButtonPrimary = styled.button<iSizeProps>`
   border-radius: 0.35rem;
-  background: var(--color-primary);
-  border: 2px solid var(--color-primary-2);
-  color: var(--grey-5);
+  background: var(--grey-1);
+  border: 0.1px solid var(--grey-4);
+  color: var(--grey-4);
 
   display: flex;
   flex-direction: row;
@@ -18,12 +23,11 @@ export const ButtonPrimary = styled.button`
 
   transition: 0.5s;
 
-  :hover {
-    opacity: 1;
+  &:hover {
     transform: scale(1.02);
-    filter: brightness(.9);
-    background: var(--color-primary-2);
-    border: 2px solid var(--color-primary);
+    filter: brightness(1.05);
+    background: #e96773;
+    border: 0.3px solid var(--grey-1);
     color: var(--grey-1);
   }
 
@@ -43,6 +47,21 @@ export const ButtonPrimary = styled.button`
         return css`
           width: 100%;
           height: 30px;
+
+          background: #e96773;
+          color: var(--grey-1);
+          border-radius: 0.35rem;
+          border: 0.3px solid var(--grey-1);
+          
+          transition: 0.5s;
+          
+          &:hover {
+            transform: scale(1.02);
+            filter: brightness(1.05);
+            background: var(--grey-1);
+            border: 0.3px solid var(--grey-4);
+            color: var(--grey-4);
+          }
         `;
       default:
         return false;
@@ -50,10 +69,10 @@ export const ButtonPrimary = styled.button`
   }}
 `;
 
-export const ButtonSecondary = styled.button`
+export const ButtonSecondary = styled.button<iSizeProps>`
   border-radius: 0.35rem;
-  background: var(--grey-4);
-  border: 2px solid var(--grey-3);
+  background: #e96773;
+  border: 1.5px solid var(--grey-1);
   color: var(--grey-1);
   
   display: flex;
@@ -68,11 +87,11 @@ export const ButtonSecondary = styled.button`
   
   transition: 0.5s;
   
-  :hover {
+  &:hover {
     opacity: 1;
-    background: var(--grey-3);
-    filter: brightness(1.6);
-    border: 1px solid var(--grey-4);
+    background: var(--grey-1);
+    filter: brightness(1.05);
+    border: 0.5px solid var(--grey-4);
     color: var(--grey-4);
   }
   
@@ -93,8 +112,9 @@ export const ButtonSecondary = styled.button`
           width: 35px;
           height: 25px;
 
-          background: var(--grey-2);
-          color: var(--grey-5);
+          background: #e96773;
+          border: 1.5px solid var(--grey-1);
+          color: var(--grey-1);
           
           font-family: var(--font-family);
           font-size: 20px;
@@ -106,29 +126,31 @@ export const ButtonSecondary = styled.button`
   }}
 `;
 
-export const ButtonNegative = styled.button`
+export const ButtonNegative = styled.button<iSizeProps>`
   border-radius: 0.5rem;
   background: var(--color-primary-dark);
-  border: 2px solid var(--grey-3);
+  border: .5px solid var(--grey-4);
   color: var(--grey-5);
-
+  
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 0px 20px;
   gap: 10px;
-
+  
   font-family: var(--font-family);
   font-weight: var(--fontWei-button);
   font-size: var(--fontSize-button);
   line-height: var(--lineHei-button);
-
+  
   transition: 0.5s;
-
+  
   :hover {
-    filter: brightness(1.2);
-    transform: scale(1.02);
+    filter: brightness(1.05);
+    background: #e96773;
+    color: var(--grey-1);
+    border: 0.3px solid var(--grey-1);
   }
 
   ${({ size }) => {

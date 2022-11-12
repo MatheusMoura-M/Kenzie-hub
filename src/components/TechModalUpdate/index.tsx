@@ -1,26 +1,29 @@
-import React, { useContext } from "react";
-import { ButtonNegative } from "../../styles/buttons";
+import { useContext } from "react";
+import { ButtonNegative, ButtonPrimary } from "../../styles/buttons";
 import { MdClose } from "react-icons/md";
 import { ThemeParagraph, ThemeTitle } from "../../styles/typography";
 import { Modal } from "../TechModalCreate/style";
 import { useForm } from "react-hook-form";
 import { TechContext } from "../../Contexts/TechContext";
 import Api from "../../services/api";
-import { AuthContext } from "../../Contexts/AuthContext";
 import { toast } from "react-toastify";
+import { iUseFormTech } from "../TechModalCreate";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 export const TechModalUpdate = () => {
   const { setIsShowModalUpdate, techSelected } = useContext(TechContext);
-
-  const { register, handleSubmit } = useForm({
+  const { loadUser } = useContext(AuthContext)
+  const { register, handleSubmit } = useForm<iUseFormTech>({
     defaultValues: { title: techSelected.title, status: techSelected.status },
   });
 
-  const updateTechs = async (data) => {
+  const updateTechs = async (data: iUseFormTech) => {
     try {
       await Api.put(`users/techs/${techSelected.id}`, data);
 
       setIsShowModalUpdate(false);
+
+      loadUser()
 
       toast.success("Tecnologia atualizada com sucesso");
     } catch (err) {
@@ -51,9 +54,9 @@ export const TechModalUpdate = () => {
                 <option value="Avançado">Avançado</option>
               </select>
             </div>
-            <ButtonNegative type="submit" size="update">
+            <ButtonPrimary type="submit" size="btnModal">
               Salvar alterações
-            </ButtonNegative>
+            </ButtonPrimary>
           </form>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import styled, {css} from "styled-components"
+import { iSizeProps } from "../../styles/buttons";
 
 export const FormRegister = styled.form`
   display:flex; 
@@ -12,7 +13,7 @@ export const FormRegister = styled.form`
 
   padding: 1rem 0;
 
-  background: var(--grey-2);
+  background:  #1e1a1a;
   border-radius: .5rem;
 
   .boxLabel{
@@ -45,15 +46,15 @@ export const FormRegister = styled.form`
       right: 5px;
       top: 17px;
       cursor: pointer;
-      color: var(--grey-5)
+      color: var(--grey-4);
     }
  
     input{
       border: 0;
       border-radius: .3rem;
-      border-bottom: 2px solid lightgrey;
+      border-bottom: 2px solid var(--grey-4);
       outline: none;
-      color: var(--grey-5);
+      color: var(--grey-4);
 
       padding: 10px;
       margin-top: 5px;
@@ -127,7 +128,7 @@ export const FormRegister = styled.form`
       color: var(--grey-4);
       border-radius: .25rem;
       
-      padding-left: 10px 
+      padding-left: 10px;
     }
   }
 
@@ -137,22 +138,22 @@ export const FormRegister = styled.form`
 
     margin-top: 15px;
     
-    background: var(--color-primary-dark);
-    color: var(--grey-5);
+    background: var(--grey-1);
+    color: var(--grey-4);
     border-radius: 0.25rem;
 
     font-family: var(--font-family);
   }
 `
 
-export const Box = styled.div`
+export const Box = styled.div<iSizeProps>`
   display:flex; 
   flex-direction: column;
   align-items: center; 
   justify-content: center;
   
-  ${({classs}) => {
-    switch (classs) {
+  ${({styleBox}) => {
+    switch (styleBox) {
       case "boxLogo":
         return css`
             flex-direction: row;
@@ -171,10 +172,6 @@ export const Box = styled.div`
         return css`
           gap: 10px;
         `;
-      // case "large":
-      //   return css`
-          
-      //   `;
       default:
         return false;
     }
@@ -186,12 +183,23 @@ export const Box = styled.div`
 
     font-family: var(--font-family);
 
-    color: var(--white);
-    background: var(--grey-2);
+    background: #e96773;
+    border: 1px solid var(--grey-1);
+    color: var(--grey-1);
     border-radius: .2rem;
     
     padding: .3rem .6rem;
   
     min-height: 40px;
+    
+    transition: 0.3s;
+
+    &:hover {
+      transition: 0.3s;
+      background: var(--grey-1);
+      filter: brightness(1.05);
+      border: 0.5px solid var(--grey-4);
+      color: var(--grey-4);
+  }
   }
 `
